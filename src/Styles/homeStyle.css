@@ -1,0 +1,93 @@
+h1 {font-family: 'EB Garamond', serif,color-white}
+ html {height: 100%}
+
+.home-container {
+  width: 100%;
+  height: 50%; 
+  margin-bottom: 10%;
+}
+
+.home-container-welcome{
+  margin-top: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+  margin: auto;  
+  color:rgb(30, 90, 70);
+  font-weight: bold;
+  font-family: 'Raleway', sans-serif;
+  font-size: 40px;
+}
+.home-container-button{
+  height: 150px;
+  position: relative;
+}
+.button-getStarted{
+  width: 50%;
+  height: 30%;
+  margin-bottom:30px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.carousel-container{
+  position: relative;
+  height: 230px;
+}
+.tip-title{
+  font-weight: bold;
+  font-style: oblique;
+  font-family: 'Pacifico', cursive;
+  color: orange;
+  text-align: center;
+}
+.info-home-title{
+  text-align: center;
+  font-weight: bold;
+  font-style: oblique;
+  font-family: 'Pacifico', cursive;
+  font-size:40px;
+  margin-bottom: 50px;;
+  color:rgb(227, 239, 240);
+}
+.tip-article{
+  font-size: large;
+}
+.caption-container{
+  position: initial !important;
+  padding-right: 10%;
+  padding-left: 10%;
+}
+.error{
+  text-align: center;
+  color: rgb(147 1 30);
+}
+@media screen and (max-width:340px) {
+  .tip-title{
+    font-size: large;
+  }
+  .tip-article{
+    font-style: italic bold 5px;
+    color:rgb(9, 19, 17)
+  }
+  .slide{
+    font-size: large;
+    height: 100%;
+    border-radius: 20px;
+    background-color: aliceblue;
+    opacity: 0.5;
+  }
+  .home-container{
+    margin-top:20%;
+    margin-bottom: inherit;
+  }
+  .home-container-welcome{
+    font-size: 20px;
+  }
+  .info-home-title{
+    font-size: 30px;
+    color: orange;
+  }
+ }

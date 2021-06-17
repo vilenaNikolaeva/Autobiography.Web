@@ -1,0 +1,14 @@
+.footer-container {
+   /* margin-top: 63px;  */
+    background-color: orange;
+    border-top: 2px solid cadetblue;
+  }
+  .container{
+    padding-left: 0% !important;
+    padding-right: 0% !important;
+  }
+  @media screen and (max-width:340px) {
+    .footer-container {
+      margin-top:50%;
+      }
+   }

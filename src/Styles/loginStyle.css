@@ -1,0 +1,45 @@
+.Login {
+  margin-top: 18%;
+  margin-bottom: 38%;
+  position: relative;
+  width: 100%;
+  }
+.login-form-control{
+  margin: 7px auto;
+  padding: 1%;
+  padding-left: 20%;
+  padding-right: 15%;
+  text-align: center;
+  color: #041322;
+}
+.login-form-control input{
+  border:1px solid #cf903c;
+  padding: 1%;
+  width: 70%;
+  border-radius: 6px;
+}
+.login-form-control button{
+  text-align: center; 
+  border:3px solid #1aaa45; 
+  padding: 1%;
+  width: 50%;
+  border-radius: 10px;;
+  color: #0d1824; 
+  background:none;
+  font-size: 20px;
+}
+.signIn-title {
+  box-sizing: content-box;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  color:#143120;
+  }
+@media screen and (max-width:340px) {
+  .Login {
+    margin-top:100%;
+    margin-bottom: 50%;
+    position: relative;
+    width: 100%;
+    }
+ }
