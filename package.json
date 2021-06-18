@@ -1,7 +1,6 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "homepage": "https://github.com/vilenaNikolaeva/Autobiography.Web",
   "private": true,
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.1.14",

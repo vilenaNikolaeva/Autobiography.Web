@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './../../Styles/loginStyle.css';
 import requester from './../../infrastructure/requester';
 import { withRouter } from 'react-router-dom';
-import Error from './../ErrorMessage/Error';
+import Error from './../errorMessage/Error';
 import { FormControl, Form, Card } from 'react-bootstrap';
+import { TOKEN, USER_ID } from '../../infrastructure/constants';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -32,7 +33,6 @@ class LoginForm extends Component {
       password: this.state.password,
       token: this.state.token
     };
-    console.log(data);
 
     if (this.state.username === null ||
       this.state.password === null) {
@@ -42,8 +42,8 @@ class LoginForm extends Component {
     requester.post('Authentication/login', data)
       .then(data => {
         if (!data.hasOwnProperty("status")) {
-          sessionStorage.setItem('token', data.token);
-          sessionStorage.setItem('user-id', data.userId);
+          sessionStorage.setItem(TOKEN, data.token);
+          sessionStorage.setItem(USER_ID, data.userId);
           this.props.onLoginChange(true);
           history.push('/');
         } else {

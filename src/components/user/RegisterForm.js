@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './../../Styles/registerStyle.css'
 import requester from './../../infrastructure/requester';
 import { Redirect } from 'react-router';
-import Error from './../ErrorMessage/Error';
+import Error from './../errorMessage/Error';
 import { Card, Form, FormControl } from 'react-bootstrap';
 
 export default class RegisterForm extends Component {

@@ -5,22 +5,19 @@ import Footer from './components/common/Footer';
 import AppRouter from './shared/AppRouter';
 import { Container } from 'react-bootstrap';
 import Particles from 'react-particles-js';
-
+import { TOKEN } from './infrastructure/constants';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
-    let token = sessionStorage.getItem('token')
     let hasToken = false;
-    if (token) {
+    if (sessionStorage.getItem(TOKEN)) {
       hasToken = true;
     }
-
     this.state = {
       loggedIn: hasToken
     }
-    // this.setState({ loggedIn: hasToken });
   }
 
   handleLoginChange = (isLogged) => {
@@ -28,7 +25,6 @@ class App extends Component {
   };
 
   render() {
-    //const { loggedIn } = this.state;
 
     return (
       <Container className="App">

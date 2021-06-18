@@ -1,6 +1,7 @@
 .cv-container{
     justify-content: space-evenly;
     text-align:justify;
+    font-family: sans-serif;
   }
 .float-child1 {
   width: 30%;
@@ -126,6 +127,7 @@ button:hover {
    .float-child3{
      width: 90%;
      float: left;
+     margin-top:8%;
      margin-left: 4%;
      border-top-left-radius: 10px;
      border-bottom-left-radius: 10px;

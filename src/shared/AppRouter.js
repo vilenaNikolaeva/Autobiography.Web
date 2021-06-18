@@ -6,16 +6,16 @@ import RegisterForm from '../components/user/RegisterForm';
 import Logout from './../components/user/Logout';
 import EditUser from './../components/forms/edit/EditUser';
 import PersonalResume from '../components/common/PersonalResume';
+import { USER_ID } from '../infrastructure/constants';
 
 export default class AppRouter extends Component {
   render = () => {
     const loggedIn = this.props.isLoggedIn;
-    const userId = sessionStorage.getItem('user-id');
 
     let userNavbarRoute =
       <Fragment>
         <Route path="/myResume"><PersonalResume isUserLoggedIn={loggedIn}></PersonalResume></Route>
-        <Route path="/edit"><EditUser userId={userId} /></Route>
+        <Route path="/edit"><EditUser userId={sessionStorage.getItem(USER_ID)} /></Route>
         <Route path="/logout"><Logout onLoginChange={this.props.onLoginChange}></Logout></Route>
       </Fragment>
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
-import { Moment } from 'moment';
+import Moment from 'moment';
 import requester from '../../../infrastructure/requester';
 
 export default class DisplayExperience extends Component {
@@ -14,7 +14,7 @@ export default class DisplayExperience extends Component {
         if (stillWork === true) {
             return <button className="currentBtn">Still work</button>
         }
-        return  <Card.Text className="calendar">{endDate.slice(0, 10)}</Card.Text>
+        return <Card.Text className="calendar">{endDate.slice(0, 10)}</Card.Text>
     }
     componentDidMount() {
         requester.get(`user/${this.props.userId}/experiences`)
@@ -28,7 +28,7 @@ export default class DisplayExperience extends Component {
                 <Card.Text className="title" name="companyName">{exp.companyName}</Card.Text>
                 <Card.Text className="dateTime">
                     <i className="fas fa-calendar-alt fa-fw w3-margin-righ" style={{ color: '#279081' }} />
-                    <Card.Text className="calendar">{exp.startDate.slice(0, 10)}</Card.Text>
+                    <Card.Text className="calendar">{Moment(exp.startDate).format('MMM DD YYYY')}</Card.Text>
                     <b>To</b>
                     {this.checkEndDate(exp.endDate, exp.stillWork)}
                 </Card.Text>

@@ -1,11 +1,11 @@
 import React ,{Component} from 'react';
 import DisplayUser from '../forms/display/DisplayUser';
+import { USER_ID } from '../../infrastructure/constants';
 
 export default class PersonalResume extends Component{
     displayUserCV = () => {
         if (this.props.isUserLoggedIn) {
-            let userId = sessionStorage.getItem('user-id');
-            return <DisplayUser userId={userId} />
+            return <DisplayUser userId={sessionStorage.getItem(USER_ID)} />
         }
     }
     render = () => {

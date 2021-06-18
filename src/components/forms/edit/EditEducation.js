@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Card, FormControl, Modal, Button, Form } from 'react-bootstrap';
 import Moment from 'moment';
 import requester from '../../../infrastructure/requester';
-import Error from './../../ErrorMessage/Error';
+import Error from './../../errorMessage/Error';
 
 export default class EditEducation extends Component {
     constructor(props) {

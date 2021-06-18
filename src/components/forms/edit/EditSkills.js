@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Card, FormControl, ProgressBar, Button, Modal, Form } from 'react-bootstrap';
 import requester from './../../../infrastructure/requester';
-import Error from './../../ErrorMessage/Error';
+import Error from './../../errorMessage/Error';
 
 export default class EditSkills extends Component {
     constructor(props) {

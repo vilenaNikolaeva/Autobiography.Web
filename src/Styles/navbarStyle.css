@@ -19,9 +19,8 @@
   border-bottom-color: rgba(255, 255, 255, .25);
   text-decoration: none;
   transition: 1s;
-  background-color: rgb(240, 181, 87);
   transform: scale(1.1);
-  color:rgb(240, 245, 242);
+  color:rgb(37, 70, 63);
 }
 
 .nav-masthead .active {

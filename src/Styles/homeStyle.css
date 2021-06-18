@@ -43,17 +43,19 @@ h1 {font-family: 'EB Garamond', serif,color-white}
   color: orange;
   text-align: center;
 }
+.info-container{
+  margin-bottom: 5%;
+}
 .info-home-title{
-  text-align: center;
   font-weight: bold;
   font-style: oblique;
   font-family: 'Pacifico', cursive;
   font-size:40px;
-  margin-bottom: 50px;;
-  color:rgb(227, 239, 240);
+  color:orange;
 }
 .tip-article{
   font-size: large;
+  font-style: italic;
 }
 .caption-container{
   position: initial !important;
@@ -69,8 +71,9 @@ h1 {font-family: 'EB Garamond', serif,color-white}
     font-size: large;
   }
   .tip-article{
-    font-style: italic bold 5px;
-    color:rgb(9, 19, 17)
+    font-style: oblique;
+    font-weight: bold;
+    color:rgb(19 58 50);
   }
   .slide{
     font-size: large;

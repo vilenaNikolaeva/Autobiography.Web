@@ -17,7 +17,7 @@ export default class Home extends Component {
                 </Card.Text>
                     {this.displayGetStartedButton()}
                 <Card.Text className="info-container">
-                    <Card.Title as="h5" className="info-home-title">Check out those tips before you get starts.</Card.Title>
+                    <Card.Title as="h5" className="info-home-title">Check out those tips before you get start.</Card.Title>
                 </Card.Text>
                 <Tips />
             </Card.Body>
