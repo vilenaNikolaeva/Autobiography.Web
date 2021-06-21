@@ -14,7 +14,7 @@ export default class DisplayExperience extends Component {
         if (stillWork === true) {
             return <button className="currentBtn">Still work</button>
         }
-        return <Card.Text className="calendar">{endDate.slice(0, 10)}</Card.Text>
+        return <Card.Text className="calendar">{Moment(endDate).format('MMM DD YYYY')}</Card.Text>
     }
     componentDidMount() {
         requester.get(`user/${this.props.userId}/experiences`)

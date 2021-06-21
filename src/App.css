@@ -53,7 +53,7 @@
 }
 @media (max-width:340px){
   .page--hero__background{
-    bottom: -400px;
+    bottom: -280px;
     height: 100%;
   }
   .card-body{

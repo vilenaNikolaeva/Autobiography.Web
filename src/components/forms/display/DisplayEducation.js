@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Card } from 'react-bootstrap';
 import requester from '../../../infrastructure/requester';
+import  Moment  from 'moment';
 
 
 export default class DisplayEducation extends Component {
@@ -14,7 +15,7 @@ export default class DisplayEducation extends Component {
         if (present === true) {
             return <button className="currentBtn">Present</button>
         }
-        return  <Card.Text className="calendar">{endDate.slice(0, 10)}</Card.Text>
+        return  <Card.Text className="calendar">{Moment(endDate).format('MMM DD YYYY')}</Card.Text>
     }
     componentDidMount(){
         requester.get(`user/${this.props.userId}/educations`)
@@ -28,7 +29,7 @@ export default class DisplayEducation extends Component {
                 <Card.Text className="title">{educ.university}</Card.Text>
                 <Card.Text className="dateTime">
                     <i className="fas fa-calendar-alt fa-fw w3-margin-right" style={{color:'#279081'}}/> 
-                    <Card.Text className="calendar">{educ.startDate.slice(0, 10)}</Card.Text>
+                    <Card.Text className="calendar">{Moment(educ.startDate).format('MMM DD YYYY')}</Card.Text>
                     <b>To</b>
                     {this.checkEndDate(educ.endDate, educ.present)}
                     </Card.Text>
