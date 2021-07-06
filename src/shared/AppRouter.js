@@ -7,6 +7,7 @@ import Logout from './../components/user/Logout';
 import EditUser from './../components/forms/edit/EditUser';
 import PersonalResume from '../components/common/PersonalResume';
 import { USER_ID } from '../infrastructure/constants';
+import ImageCropper from './../components/forms/edit/ImageCropper';
 
 export default class AppRouter extends Component {
   render = () => {

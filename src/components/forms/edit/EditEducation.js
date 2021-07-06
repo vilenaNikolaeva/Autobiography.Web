@@ -19,7 +19,8 @@ export default class EditEducation extends Component {
             userId: this.props.userId,
             error: null,
             showAdd: false,
-            showEdit: false
+            showEdit: false,
+            showDelete: false
         }
     }
     handleCloseAdd = () => {
@@ -34,16 +35,34 @@ export default class EditEducation extends Component {
     handleShowEdit = () => {
         this.setState({ showEdit: true });
     }
-    getEducationForEdit = (currEducation) => {
+    handleCloseDelete = () => {
+        this.setState({ showDelete: false });
+    }
+    handleShowDelete = () => {
+        this.setState({ showDelete: true });
+    }
+    getEducationForEdit = (educationForEdit) => {
         this.setState({
-            id: currEducation.id,
-            startDate: Moment(currEducation.startDate).format('YYYY-MM-DD'),
-            endDate: Moment(currEducation.endDate).format('YYYY-MM-DD'),
-            present: currEducation.present,
-            university: currEducation.university,
-            title: currEducation.title,
-            description: currEducation.description,
+            id: educationForEdit.id,
+            startDate: Moment(educationForEdit.startDate).format('YYYY-MM-DD'),
+            endDate: Moment(educationForEdit.endDate).format('YYYY-MM-DD'),
+            present: educationForEdit.present,
+            university: educationForEdit.university,
+            title: educationForEdit.title,
+            description: educationForEdit.description,
             showEdit: true
+        });
+    }
+    getEducationForDelete = (educationForDelete) => {
+        this.setState({
+            id: educationForDelete.id,
+            startDate: Moment(educationForDelete.startDate).format('YYYY-MM-DD'),
+            endDate: Moment(educationForDelete.endDate).format('YYYY-MM-DD'),
+            present: educationForDelete.present,
+            university: educationForDelete.university,
+            title: educationForDelete.title,
+            description: educationForDelete.description,
+            showDelete: true
         });
     }
     handleChange = (e) => {
@@ -56,7 +75,7 @@ export default class EditEducation extends Component {
         else if (value === 'false') {
             return this.setState({ [name]: true, endDate: new Date() });
         }
-        else if(name === 'endDate'){
+        else if (name === 'endDate') {
             return this.setState({ present: null });
         }
 
@@ -64,7 +83,7 @@ export default class EditEducation extends Component {
     }
     checkEndDate = (endDate, present) => {
         if (present === true) {
-            return <button className="currentBtn">Present</button>
+            return <Card.Text as="span" className="onGoingSpan">Present</Card.Text>
         }
         return <Card.Text className="calendar">{Moment(endDate).format('MMM DD YYYY')}</Card.Text>
     }
@@ -130,10 +149,13 @@ export default class EditEducation extends Component {
             .catch(err => this.setState({ error: err }))
     }
     handleDelete = (education) => {
-        requester.remove(`education/${education.id}`)
+        requester.remove(`education/${this.state.id}`)
             .then(data => {
-                const educationForDelete = this.state.educations.filter(e => e.id !== education.id);
-                this.setState({ educations: educationForDelete })
+                const educationForDelete = this.state.educations.filter(e => e.id !== this.state.id);
+                this.setState({
+                    educations: educationForDelete,
+                    showDelete: false
+                })
             })
             .catch(err => this.setState({ error: err.title }))
     }
@@ -141,23 +163,26 @@ export default class EditEducation extends Component {
         requester.get(`user/${this.props.userId}/educations`)
             .then(data => {
                 this.setState({ educations: data })
+            })
+            .catch(err => {
+                this.setState({ error: err })
             });
     }
     render = () => {
         let currEducations = this.state.educations.map((educ, index) => {
             return <div className="divContainer" key={index}>
                 <Card.Body>
-                    <Card.Text className="title" name="university">{educ.university}</Card.Text>
+                    <Card.Text className="title" name="university"><b>{educ.university}</b></Card.Text>
                     <Card.Text className="dateTime">
                         <i className="fas fa-calendar-alt fa-fw w3-margin-righ" style={{ color: '#279081' }} />
                         {Moment(educ.startDate).format('MMM DD YYYY')}
                         <b> To </b>
                         {this.checkEndDate(educ.endDate, educ.present)}
                     </Card.Text>
-                    <Card.Text name="title" >{educ.title}</Card.Text>
-                    <Card.Text name="description">{educ.description}</Card.Text>
+                    <Card.Text className="title" > Educational qualification : <b>{educ.title}</b></Card.Text>
+                    <Card.Text className="description">{educ.description}</Card.Text>
                     <button className="editBtn" onClick={() => this.getEducationForEdit(educ)}  ><i className="fas fa-edit"></i></button>
-                    <button className="editBtn" onClick={() => this.handleDelete(educ)}><i className="far fa-trash-alt"></i></button>
+                    <button className="editBtn" onClick={() => this.getEducationForDelete(educ)}><i className="far fa-trash-alt"></i></button>
                     <hr className="dividing-line" />
                 </Card.Body>
             </div>
@@ -182,6 +207,7 @@ export default class EditEducation extends Component {
                                 <Form.Label className="col-form-label">University:</Form.Label>
                                 <FormControl
                                     name="university"
+                                    placeholder="Write your education school..."
                                     value={this.state.university}
                                     onChange={(e) => this.handleChange(e)}></FormControl>
                             </Form.Group>
@@ -189,12 +215,14 @@ export default class EditEducation extends Component {
                                 <b>From </b>
                                 <FormControl
                                     name="startDate"
+                                    placeholder="When it start..."
                                     type="date"
                                     onChange={(e) => this.handleChange(e)}
                                     required={true} />
                                 <b> To </b>
                                 <FormControl
                                     name="endDate"
+                                    placeholder="When it end..."
                                     type="date"
                                     onChange={(e) => this.handleChange(e)}
                                 />
@@ -204,6 +232,7 @@ export default class EditEducation extends Component {
                                 <Form.Label className="col-form-label">Degree:</Form.Label>
                                 <FormControl name="title"
                                     value={this.state.title}
+                                    placeholder="Write your education qualification..."
                                     required={true}
                                     onChange={(e) => this.handleChange(e)} ></FormControl>
                             </Form.Group>
@@ -212,6 +241,7 @@ export default class EditEducation extends Component {
                                 <FormControl
                                     as="textarea"
                                     name="descritpion"
+                                    placeholder="Describe your education experience..."
                                     value={this.state.description}
                                     required={true}
                                     onChange={(e) => this.handleChange(e)} ></FormControl>
@@ -281,6 +311,29 @@ export default class EditEducation extends Component {
                         <Button variant="secondary" onClick={this.handleCloseEdit}> Close</Button>
                         <Button variant="primary" onClick={this.handleEdit}>Edit</Button>
                     </Modal.Footer>
+                </Modal>
+                {/* DELETE MODAL FORM */}
+                <Modal
+                    size="sm"
+                    show={this.state.showDelete}
+                    onHide={this.handleCloseDelete}
+                    aria-labelledby="example-modal-sizes-title-sm"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id="example-modal-sizes-title-sm">
+                            Please, confirm the delete action.
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Form>
+                        <Modal.Body>
+                            <Card.Text className="title" name="university"><b>{this.state.university}</b></Card.Text>
+                            <Card.Text className="title" > Educational qualification : <b>{this.state.title}</b></Card.Text>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={() => this.handleDelete()}>Yes</Button>
+                            <Button onClick={this.handleCloseDelete}>Close</Button>
+                        </Modal.Footer>
+                    </Form>
                 </Modal>
             </Container>
         )

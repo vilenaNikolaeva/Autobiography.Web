@@ -51,9 +51,14 @@
 }
 @media screen and (max-width:340px) {
   .Register {
-    margin-top:80%;
+    margin-top:30%;
     margin-bottom: 10%;
     position: relative;
     width: 100%;
+    }
+ }
+ @media screen and (max-width:780px) {
+  .Register {
+    margin-top: 20%;
     }
  }

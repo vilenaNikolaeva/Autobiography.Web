@@ -59,18 +59,19 @@ class LoginForm extends Component {
   render = () => {
     return (
       <Form onSubmit={this.handleSubmit} className="Login">
-        <Card.Title as="h3"className="signIn-title">Please sign in</Card.Title>
-        <Error error={this.state.error}></Error>
-        <Form.Group className="login-form-control">
-          <FormControl type="text" name="username"  onChange={this.handleChange} placeholder="Username..." />
-        </Form.Group>
-        <Form.Group className="login-form-control">
-          <FormControl type="password" name="password" onChange={this.handleChange} placeholder="Password..." autoComplete="on" />
-        </Form.Group>
-        <Form.Group className="login-form-control">
-          <button type="btn btn-sumbit" onClick={this.handleSubmit} value="Login" ><b>Login</b></button>
-        </Form.Group>
-
+        <div className="login-container">
+          <Card.Title as="h3" className="login-title">Sign in</Card.Title>
+          <Error error={this.state.error}></Error>
+          <Form.Group className="login-form-control">
+            <FormControl type="text" name="username" onChange={this.handleChange} placeholder="Username..." />
+          </Form.Group>
+          <Form.Group className="login-form-control">
+            <FormControl type="password" name="password" onChange={this.handleChange} placeholder="Password..." autoComplete="on" />
+          </Form.Group>
+          <Form.Group className="login-form-control">
+            <button type="btn btn-sumbit" onClick={this.handleSubmit} value="Login" ><b>Login</b></button>
+          </Form.Group>
+        </div>
       </Form>
     );
   }

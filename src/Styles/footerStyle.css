@@ -1,4 +1,5 @@
 .footer-container {
+  position: absolute;
     background-color: orange;
     border-top: 2px solid cadetblue;
   }

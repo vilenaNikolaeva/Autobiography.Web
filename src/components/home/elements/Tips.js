@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 export default class Tips extends Component {
   render = () => {
     return (
-      <Container >
+      <Container as="div" className="tip-container" >
         <Carousel as="div" className="carousel-container">
         <Carousel.Item  interval={100000}>
             <Carousel.Caption as="div" className="caption-container" >

@@ -6,6 +6,7 @@ import AppRouter from './shared/AppRouter';
 import { Container } from 'react-bootstrap';
 import Particles from 'react-particles-js';
 import { TOKEN } from './infrastructure/constants';
+// import particlesConfig from './components/particles/particles-config';
 
 class App extends Component {
   constructor(props) {
@@ -25,16 +26,15 @@ class App extends Component {
   };
 
   render() {
-
     return (
       <Container className="App">
         <Container className="Header">
           <Navigation onLoginChange={this.handleLoginChange} isLoggedIn={this.state.loggedIn} />
         </Container>
-        <Container className="Container px-3">
+        <Container className="Container">
           <AppRouter onLoginChange={this.handleLoginChange} isLoggedIn={this.state.loggedIn} />
         </Container>
-        <Particles className="page--hero__background"></Particles>
+        <Particles className="particles"></Particles>
         <Container className="Footer">
           <Footer />
         </Container>

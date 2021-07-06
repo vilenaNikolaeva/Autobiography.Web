@@ -57,6 +57,11 @@ h1 {font-family: 'EB Garamond', serif,color-white}
   font-size: large;
   font-style: italic;
 }
+.tip-container{
+  border-color: #9addb5;
+  border-style: inset;
+  border-radius: 20px;
+}
 .caption-container{
   position: initial !important;
   padding-right: 10%;
@@ -70,7 +75,7 @@ h1 {font-family: 'EB Garamond', serif,color-white}
   color: rgb(147 1 30);
 }
 
-@media screen and (max-width:340px) {
+@media screen and (max-width:640px) {
   .tip-title{
     font-size: large;
   }

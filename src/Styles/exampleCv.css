@@ -36,17 +36,28 @@
   font-style: italic;
 }
 .userName{
-  font-size: larger;
+  font-size: 20px;
   font-weight: bold;
 }
-.avatar-picture{
-  width: 60%;
-  height: 60%;
-  margin-top:5%;
-  margin-left: 18%;
-  border-radius: 50%;
+.exampleTitle{
+  color:rgb(2, 47, 47);
+  font-size: 15px;
+}
+.exampleCalendar{
+  display: inline-block;
+  font-size: 15px;
+  margin: 10px;
+}
+.avatar_image{
+  width: 140px;
+  height: 140px;
+  margin-left: 20px;
+  margin-top: 20px;
+  border-radius: 20px;
+  box-shadow: 5px 10px 13px 5px #80918b;
 }
 .exe-cv-container1{
+  transform: perspective(600px) rotateX(0deg) rotateY(0deg) scale(1);
   width: 30%;
   margin-top:8%;
   margin-left:2% ;
@@ -123,6 +134,56 @@
      margin-left: 4%;
      border-top-left-radius: 10px;
      border-bottom-left-radius: 10px;
+   }
+   .avatar_image{
+     width: 40px;
+     height: 40px;
+   }
+ }
+ 
+@media screen and (max-width:780px) {
+  .message-container{
+    float: inherit;
+    width: inherit;
+  }
+  .exe-cv-container{
+    width: inherit;
+    margin-right: 3%;
+  }
+  .message-question{
+    color: orange;
+  }
+  .message-title{
+    color: #203838;
+  }
+  .message-text{
+    font-size: larger;
+  }
+  .exe-cv-container1{
+    width: 100%;
+    margin-left: 4%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+   }
+   .exe-cv-container2{
+     width: 100%;
+     float: left;
+     margin-left: 4%;
+     border-top-left-radius: 10px;
+     border-bottom-left-radius: 10px;
+   }
+   .exe-cv-container3{
+     width: 100%;
+     float: left;
+     margin-top:8%;
+     margin-left: 4%;
+     border-top-left-radius: 10px;
+     border-bottom-left-radius: 10px;
+   }
+   .avatar_image{
+    width: 140px;
+    height: 140px;
+    margin-bottom: .3rem;
    }
  }
 

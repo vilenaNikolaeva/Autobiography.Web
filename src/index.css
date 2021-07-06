@@ -1,8 +1,9 @@
 body {
   /* background: rgb(0,200,170);
   background: linear-gradient(to right,#313B47,#00C8AA); */
-  /* background-color: aliceblue; */
-  background-image: url('./images/htmlBackgroundjpg.jpg');
+  background-color: #e4e9e9;;
+  
+  /* background-image: url('./images/background.jpg'); */
   text-align: center;
 }
 

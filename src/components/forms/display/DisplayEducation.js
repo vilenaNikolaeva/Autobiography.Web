@@ -13,7 +13,7 @@ export default class DisplayEducation extends Component {
     }
     checkEndDate = (endDate, present) => {
         if (present === true) {
-            return <button className="currentBtn">Present</button>
+            return < Card.Text as="span" className="onGoingSpan">Present</Card.Text>
         }
         return  <Card.Text className="calendar">{Moment(endDate).format('MMM DD YYYY')}</Card.Text>
     }
@@ -33,7 +33,7 @@ export default class DisplayEducation extends Component {
                     <b>To</b>
                     {this.checkEndDate(educ.endDate, educ.present)}
                     </Card.Text>
-                <Card.Text>{educ.title}</Card.Text>
+                <Card.Text>Educational qualification : <b>{educ.title}</b></Card.Text>
                 <Card.Text>{educ.description}</Card.Text>
                 <hr className="dividing-line" />
             </div>

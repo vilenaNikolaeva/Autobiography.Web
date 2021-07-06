@@ -12,10 +12,10 @@ export default class EditLanguages extends Component {
             name: null,
             level: null,
             languages: [{}],
-            userId: this.props.userId,
             error: null,
             showAdd: false,
-            showEdit: false
+            showEdit: false,
+            showDelete: false
         }
     }
     handleCloseAdd = () => {
@@ -30,13 +30,27 @@ export default class EditLanguages extends Component {
     handleShowEdit = () => {
         this.setState({ showEdit: true });
     }
-    getlanguageForEdit = (language) => {
+    handleCloseDelete = () => {
+        this.setState({ showDelete: false });
+    }
+    handleShowDelete = () => {
+        this.setState({ showDelete: true });
+    }
+    getlanguageForEdit = (languageForEdit) => {
         this.setState({
-            id: language.id,
-            name: language.name,
-            level: language.level,
+            id: languageForEdit.id,
+            name: languageForEdit.name,
+            level: languageForEdit.level,
             showEdit: true
         })
+    }
+    getLanguageForDelete = (languageforDelete) => {
+        this.setState({
+            id: languageforDelete.id,
+            name: languageforDelete.name,
+            level: languageforDelete.level,
+            showDelete: true
+        });
     }
     handleChange = (e) => {
         const name = e.target.name;
@@ -47,7 +61,7 @@ export default class EditLanguages extends Component {
         const data = {
             name: this.state.name,
             level: this.state.level,
-            userId: this.state.userId
+            userId: this.props.userId
         };
         if (data.name === null || data.level === null) {
             return this.setState({ error: 'All fields are required.' })
@@ -81,27 +95,35 @@ export default class EditLanguages extends Component {
             })
             .catch(err => this.setState({ error: err }))
     }
-    handleDelete = (language) => {
-        requester.remove(`Language/${language.id}`)
+    handleDelete = () => {
+        requester.remove(`Language/${this.state.id}`)
             .then(data => {
-                const languageForDelete = this.state.languages.filter(l => l.id !== language.id);
-                this.setState({ languages: languageForDelete })
+                const languageForDelete = this.state.languages.filter(l => l.id !== this.state.id);
+                this.setState({
+                    languages: languageForDelete,
+                    showDelete: false
+                });
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                this.setState({ error: err })
+            })
     }
     componentDidMount() {
         requester.get(`user/${this.props.userId}/languages`)
             .then(data => {
                 this.setState({ languages: data })
+            })
+            .catch(err => {
+                this.setState({ error: err })
             });
     }
     render = () => {
         let currLanguages = this.state.languages.map((language, index) => {
             return <div key={index}>
-                <Card.Text placeholder={language.name}>{language.name}</Card.Text>
+                <Card.Text className="description" placeholder={language.name}>{language.name}</Card.Text>
                 <ProgressBar className="scale" now={language.level} label={`${language.level}%`}></ProgressBar>
                 <button className="editBtn" onClick={() => this.getlanguageForEdit(language)} ><i className="fas fa-edit"></i></button>
-                <button className="editBtn" onClick={() => this.handleDelete(language)}  ><i className="far fa-trash-alt"></i></button>
+                <button className="editBtn" onClick={() => this.getLanguageForDelete(language)}  ><i className="far fa-trash-alt"></i></button>
                 <br />
             </div>
         })
@@ -174,6 +196,29 @@ export default class EditLanguages extends Component {
                         <Button variant="secondary" onClick={this.handleCloseEdit}>Close</Button>
                         <Button variant="primary" onClick={this.handleEdit}>Edit</Button>
                     </Modal.Footer>
+                </Modal>
+                {/* DELETE MODAL FORM */}
+                <Modal
+                    size="sm"
+                    show={this.state.showDelete}
+                    onHide={this.handleCloseDelete}
+                    aria-labelledby="example-modal-sizes-title-sm"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id="example-modal-sizes-title-sm">
+                            Please, confirm the delete action.
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Form>
+                        <Modal.Body>
+                            <Card.Text>{this.state.name}</Card.Text>
+                            <ProgressBar className="scale" now={this.state.level} label={`${this.state.level}%`}  ></ProgressBar>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={() => this.handleDelete()}>Yes</Button>
+                            <Button onClick={this.handleCloseDelete}>Close</Button>
+                        </Modal.Footer>
+                    </Form>
                 </Modal>
                 <hr className="dividing-line" />
             </Container>

@@ -13,12 +13,14 @@ export default class EditExperience extends Component {
             startDate: null,
             endDate: null,
             stillWork: false,
+            jobTitle: null,
             description: null,
             companyName: null,
             experiences: [{}],
             error: null,
             showAdd: false,
-            showEdit: false
+            showEdit: false,
+            showDelete: false
         }
     }
     handleCloseAdd = () => {
@@ -33,15 +35,34 @@ export default class EditExperience extends Component {
     handleShowEdit = () => {
         this.setState({ showEdit: true });
     }
-    getExperienceForEdit = (currExperience) => {
+    handleCloseDelete = () => {
+        this.setState({ showDelete: false });
+    }
+    handleShowDelete = () => {
+        this.setState({ showDelete: true });
+    }
+    getExperienceForEdit = (experienceForEdit) => {
         this.setState({
-            id: currExperience.id,
-            startDate: Moment(currExperience.startDate).format('YYYY-MM-DD'),
-            endDate: Moment(currExperience.endDate).format('YYYY-MM-DD'),
-            stillWork: currExperience.stillWork,
-            description: currExperience.description,
-            companyName: currExperience.companyName,
+            id: experienceForEdit.id,
+            startDate: Moment(experienceForEdit.startDate).format('YYYY-MM-DD'),
+            endDate: Moment(experienceForEdit.endDate).format('YYYY-MM-DD'),
+            stillWork: experienceForEdit.stillWork,
+            jobTitle: experienceForEdit.jobTitle,
+            description: experienceForEdit.description,
+            companyName: experienceForEdit.companyName,
             showEdit: true
+        });
+    }
+    getExperienceForDelete = (experienceForDelete) => {
+        this.setState({
+            id: experienceForDelete.id,
+            startDate: Moment(experienceForDelete.startDate).format('YYYY-MM-DD'),
+            endDate: Moment(experienceForDelete.endDate).format('YYYY-MM-DD'),
+            stillWork: experienceForDelete.stillWork,
+            jobTitle: experienceForDelete.jobTitle,
+            description: experienceForDelete.description,
+            companyName: experienceForDelete.companyName,
+            showDelete: true
         });
     }
     handleChange = (e) => {
@@ -59,7 +80,7 @@ export default class EditExperience extends Component {
     }
     checkEndDate = (endDate, stillWork) => {
         if (stillWork === true) {
-            return <button className="currentBtn">Still work</button>
+            return <Card.Text as="span" className="onGoingSpan">Still work</Card.Text>
         }
         return <Card.Text className="calendar">{Moment(endDate).format('MMM DD YYYY')}</Card.Text>
     }
@@ -68,6 +89,7 @@ export default class EditExperience extends Component {
             startDate: this.state.startDate,
             endDate: this.state.endDate,
             stillWork: this.state.stillWork,
+            jobTitle: this.state.jobTitle,
             description: this.state.description,
             companyName: this.state.companyName,
             userId: this.props.userId
@@ -85,6 +107,7 @@ export default class EditExperience extends Component {
                         startDate: Moment(this.state.startDate).format('YYYY-MM-DD'),
                         endDate: Moment(this.state.endDate).format('YYYY-MM-DD'),
                         stillWork: this.state.stillWork,
+                        jobTitle: this.state.jobTitle,
                         description: this.state.description,
                         companyName: this.state.companyName,
                         userId: this.props.userId
@@ -103,6 +126,7 @@ export default class EditExperience extends Component {
             startDate: Moment(this.state.startDate).format('YYYY-MM-DD'),
             endDate: Moment(this.state.endDate).format('YYYY-MM-DD'),
             stillWork: this.state.stillWork,
+            jobTitle: this.state.jobTitle,
             description: this.state.description,
             companyName: this.state.companyName
         };
@@ -118,17 +142,22 @@ export default class EditExperience extends Component {
                 currExperience.startDate = Moment(this.statestartDate).format('YYYY-MM-DD');
                 currExperience.endDate = Moment(this.state.endDate).format('YYYY-MM-DD');
                 currExperience.stillWork = this.state.stillWork;
+                currExperience.jobTitle = this.state.jobTitle;
                 currExperience.description = this.state.description;
                 currExperience.companyName = this.state.companyName;
+
                 this.setState({ experiences: this.state.experiences, showEdit: false })
             })
             .catch(err => this.setState({ error: err }))
     }
-    handleDelete = (experience) => {
-        requester.remove(`experience/${experience.id}`)
+    handleDelete = () => {
+        requester.remove(`experience/${this.state.id}`)
             .then(data => {
-                const experienceForDelete = this.state.experiences.filter(e => e.id !== experience.id);
-                this.setState({ experiences: experienceForDelete })
+                const experienceForDelete = this.state.experiences.filter(e => e.id !== this.state.id);
+                this.setState({
+                    experiences: experienceForDelete,
+                    showDelete: false
+                })
             })
             .catch(err => console.log(err))
     }
@@ -136,22 +165,25 @@ export default class EditExperience extends Component {
         requester.get(`user/${this.props.userId}/experiences`)
             .then(data => {
                 this.setState({ experiences: data })
+            })
+            .catch(err => {
+                this.setState({ error: err })
             });
     }
     render = () => {
         let currExperiences = this.state.experiences.map((exp, index) => {
             return <div className="divContainer" key={index} >
                 <Card.Body>
-                    <Card.Text className="title" name="companyName">{exp.companyName}</Card.Text>
+                    <Card.Text className="title" >Experience as: <b>{exp.jobTitle}</b> at : <b>{exp.companyName}</b></Card.Text>
                     <Card.Text className="dateTime">
                         <i className="fas fa-calendar-alt fa-fw w3-margin-righ" style={{ color: '#279081' }} />
                         <Card.Text className="calendar"> {Moment(exp.startDate).format('MMM DD YYYY')}</Card.Text>
                         <b>To</b>
                         {this.checkEndDate(exp.endDate, exp.stillWork)}
                     </Card.Text>
-                    <Card.Text className="companyDescription" name="description" >{exp.description}</Card.Text>
+                    <Card.Text className="description" name="description" >{exp.description}</Card.Text>
                     <button className="editBtn" onClick={() => this.getExperienceForEdit(exp)}  ><i className="fas fa-edit"></i></button>
-                    <button className="editBtn" onClick={() => this.handleDelete(exp)} ><i className="far fa-trash-alt"></i></button>
+                    <button className="editBtn" onClick={() => this.getExperienceForDelete(exp)} ><i className="far fa-trash-alt"></i></button>
                 </Card.Body>
                 <hr className="dividing-line" />
             </div >
@@ -174,13 +206,21 @@ export default class EditExperience extends Component {
                     <Modal.Body>
                         <Form>
                             <Form.Group className="mb-3">
-                                <Form.Label className="col-form-label">Experience/Company Name:</Form.Label>
+                                <Form.Label className="col-form-label">Experience:</Form.Label>
                                 <FormControl
-                                    name="companyName"
-                                    placeholder="Write Job Title/Company Name..."
-                                    value={this.state.companyName}
-                                    onChange={(e) => this.handleChange(e)}></FormControl>
+                                    name="jobTitle"
+                                    placeholder="Write Job Title..."
+                                    value={this.state.jobTitle}
+                                    onChange={(e) => this.handleChange(e)}>
+                                </FormControl>
                             </Form.Group>
+                            <Form.Label className="col-form-label">Company Name:</Form.Label>
+                            <FormControl
+                                name="companyName"
+                                placeholder="Write Company Name..."
+                                value={this.state.companyName}
+                                onChange={(e) => this.handleChange(e)}>
+                            </FormControl>
                             <Form.Group className="mb-3">
                                 <b>From </b>
                                 <FormControl
@@ -229,7 +269,14 @@ export default class EditExperience extends Component {
                     <Modal.Body>
                         <Form>
                             <Form.Group className="mb-3">
-                                <Form.Label className="col-form-label">Experience/Company Name:</Form.Label>
+                                <Form.Label className="col-form-label">Experience:</Form.Label>
+                                <FormControl
+                                    name="jobTitle"
+                                    placeholder="Write Job Title..."
+                                    value={this.state.jobTitle}
+                                    onChange={(e) => this.handleChange(e)}>
+                                </FormControl>
+                                <Form.Label className="col-form-label">Company Name:</Form.Label>
                                 <FormControl
                                     name="companyName"
                                     value={this.state.companyName}
@@ -268,6 +315,28 @@ export default class EditExperience extends Component {
                         <Button variant="secondary" onClick={this.handleCloseEdit}>Close</Button>
                         <Button variant="primary" onClick={this.handleEdit}>Edit</Button>
                     </Modal.Footer>
+                </Modal>
+                {/* DELETE MODAL FORM */}
+                <Modal
+                    size="sm"
+                    show={this.state.showDelete}
+                    onHide={this.handleCloseDelete}
+                    aria-labelledby="example-modal-sizes-title-sm"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id="example-modal-sizes-title-sm">
+                            Please, confirm the delete action.
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Form>
+                        <Modal.Body>
+                            <Card.Text className="title" >Experience as: <b>{this.state.jobTitle}</b> at : <b>{this.state.companyName}</b></Card.Text>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={() => this.handleDelete()}>Yes</Button>
+                            <Button onClick={this.handleCloseDelete}>Close</Button>
+                        </Modal.Footer>
+                    </Form>
                 </Modal>
             </Container >
         )

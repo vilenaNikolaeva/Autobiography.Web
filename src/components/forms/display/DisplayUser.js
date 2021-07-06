@@ -12,7 +12,7 @@ export default class DisplayUser extends Component {
         return (
             <div className="cv-container" >
                 <Card.Body className="float-child1">
-                    <Figure.Image width={171} height={180} alt="Image" src="https://img.icons8.com/cotton/2x/gender-neutral-user--v2.png" />
+                    {/* <Figure.Image width={171} height={180} alt="Image" src="https://img.icons8.com/cotton/2x/gender-neutral-user--v2.png" /> */}
                     <DisplayProfile userId={this.props.userId}></DisplayProfile>
                     <DisplaySkills userId={this.props.userId}></DisplaySkills>
                     <DisplayLanguages userId={this.props.userId}></DisplayLanguages>

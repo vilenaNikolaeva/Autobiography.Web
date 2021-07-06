@@ -12,7 +12,7 @@ export default class DisplayExperience extends Component {
     }
     checkEndDate = (endDate, stillWork) => {
         if (stillWork === true) {
-            return <button className="currentBtn">Still work</button>
+            return <Card.Text as="span" className="onGoingSpan">Still work</Card.Text>
         }
         return <Card.Text className="calendar">{Moment(endDate).format('MMM DD YYYY')}</Card.Text>
     }
@@ -25,7 +25,8 @@ export default class DisplayExperience extends Component {
     render = () => {
         let experiences = this.state.userExperience.map((exp, index) => {
             return <div className="divContainer" key={index} >
-                <Card.Text className="title" name="companyName">{exp.companyName}</Card.Text>
+                <br/>
+                <Card.Text className="title" >Experience as: <b>{exp.jobTitle}</b> at : <b>{exp.companyName}</b></Card.Text>
                 <Card.Text className="dateTime">
                     <i className="fas fa-calendar-alt fa-fw w3-margin-righ" style={{ color: '#279081' }} />
                     <Card.Text className="calendar">{Moment(exp.startDate).format('MMM DD YYYY')}</Card.Text>

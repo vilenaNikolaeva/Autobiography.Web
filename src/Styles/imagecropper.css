@@ -1,0 +1,41 @@
+  .cropper{
+    height: 70%;
+    width: 50%;
+    margin-right: 0;
+    float: right;
+  }
+  .cropped_image{
+    width: 40%;
+    border-radius: 20px;
+  }
+  .input_file_container{
+    margin-bottom: '20px' 
+  }
+  .input_file{
+    width: 50%;
+  }
+  .cropper_button{
+    float: left;
+    margin-top: 10px; 
+  }
+
+  @media screen and (max-width:770px){
+    .image_crooper_container{
+      display: flex;
+      flex-flow: column;
+    }
+    .crooper-container{
+      width: 200px;
+      height: 250px;
+    }
+    .cropper{
+      height: 50%;
+    }
+    .cropped_image{
+      width: 70%;
+      border-radius: 20px;
+    }
+    .input_file {
+      width: 43%;
+    }
+  }

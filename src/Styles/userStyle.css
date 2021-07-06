@@ -54,7 +54,10 @@
   color:aliceblue;
   background-color: cadetblue;
 }
-.currentBtn{
+.onGoingSpan{
+  display: inline-flex;
+  width: 100px;
+  justify-content: center;
   margin-left:2%;
   color: aliceblue;
   background-color:#279081;
@@ -63,7 +66,6 @@
 }
 .title{
   font-size: 20px;
-  font-weight: bold;
   color:rgb(102, 101, 101);
 }
 .form-title{
@@ -71,12 +73,20 @@
   font-weight: bold;
   color:rgb(87, 85, 85);
 }
+.profile_image{
+  width: 220px;
+  height: 220px;
+  margin-left: 20px;
+  border-radius: 20px;
+  box-shadow: -1px 0px 18px 3px #80918b;
+}
 .user-name{
   font-size:25px;
   font-weight: bold;
 }
 .dateTime{
   color:#3c6c56;
+  font-size: larger;
   
 }
 .dividing-line{
@@ -86,8 +96,11 @@
   display: inline-block;
   margin: 10px;
 }
+.description{
+  color:  #1f1c1c;
+}
 .Container{
-  position: relative;
+  /* margin-top:10%; */
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -133,3 +146,41 @@ button:hover {
      border-bottom-left-radius: 10px;
    }
  }
+ .profile_image{
+   width: 180px;
+   height: 180px;
+ }
+.profile_edit_form{
+  width: 100%;
+}
+
+@media screen and (max-width:780px) {
+  .float-child1{
+    width: 90%;
+    margin-left: 4%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+   }
+   .float-child2{
+     width: 90%;
+     float: left;
+     margin-left: 4%;
+     border-top-left-radius: 10px;
+     border-bottom-left-radius: 10px;
+   }
+   .float-child3{
+     width: 90%;
+     float: left;
+     margin-top:8%;
+     margin-left: 4%;
+     border-top-left-radius: 10px;
+     border-bottom-left-radius: 10px;
+   }
+ }
+ .profile_image{
+   width: 180px;
+   height: 180px;
+ }
+.profile_edit_form{
+  width: 100%;
+}

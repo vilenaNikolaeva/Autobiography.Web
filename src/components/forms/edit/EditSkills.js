@@ -13,7 +13,8 @@ export default class EditSkills extends Component {
             skills: [{}],
             error: null,
             showAdd: false,
-            showEdit: false
+            showEdit: false,
+            showDelete: false
         }
     }
     handleCloseAdd = () => {
@@ -28,6 +29,12 @@ export default class EditSkills extends Component {
     handleShowEdit = () => {
         this.setState({ showEdit: true });
     }
+    handleCloseDelete = () => {
+        this.setState({ showDelete: false });
+    }
+    handleShowDelete = () => {
+        this.setState({ showDelete: true });
+    }
     getSkillForEdit = (currentSkill) => {
         this.setState({
             id: currentSkill.id,
@@ -36,6 +43,15 @@ export default class EditSkills extends Component {
             showEdit: true
         });
     }
+    getSkillForDelete = (skillForDelete) => {
+        this.setState({
+            id: skillForDelete.id,
+            title: skillForDelete.title,
+            level: skillForDelete.level,
+            showDelete: true
+        });
+    }
+
     handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -48,10 +64,12 @@ export default class EditSkills extends Component {
             level: this.state.level,
             userId: this.props.userId
         }
+        if (data.title == null || data.level == null) {
+            return this.setState({ error: "All fields are required!" })
+        }
 
         requester.post(`skill`, data)
             .then(data => {
-                console.log(data);
                 if (!data.errors) {
                     this.state.skills.push(data);
                     this.setState({ skills: this.state.skills, showAdd: false })
@@ -61,7 +79,9 @@ export default class EditSkills extends Component {
                 }
 
             })
-            .catch(err => { console.log(err) })
+            .catch(err => {
+                this.setState({ error: err })
+            })
     }
     handleEdit = () => {
         const data = {
@@ -78,31 +98,41 @@ export default class EditSkills extends Component {
                 currSkill.level = this.state.level;
                 this.setState({ skills: this.state.skills, showEdit: false })
             })
-            .catch(err => console.log(err))
-    }
-    handleDelete = (skill) => {
-        requester.remove(`Skill/${skill.id}`)
-            .then(data => {
-                const skillsAfterDelete = this.state.skills.filter(s => s.id !== skill.id);
-                this.setState({ skills: skillsAfterDelete })
+            .catch(err => {
+                this.setState({ error: err })
             })
-            .catch(err => console.log(err))
+    }
+    handleDelete = () => {
+        requester.remove(`Skill/${this.state.id}`)
+            .then(data => {
+                const skillsAfterDelete = this.state.skills.filter(s => s.id !== this.state.id);
+                this.setState({
+                    skills: skillsAfterDelete,
+                    showDelete: false
+                })
+            })
+            .catch(err => {
+                this.setState({ error: err })
+            })
     }
     componentDidMount() {
         // GET SKILLS
         requester.get(`user/${this.props.userId}/skills`)
             .then(data => {
                 this.setState({ skills: data })
+            })
+            .catch(err => {
+                this.setState({ error: err })
             });
     }
     render = () => {
         let currentSkills =
             this.state.skills.map((skill, index) => {
                 return <div key={index}>
-                    <Card.Text placeholder={skill.title} >{skill.title}</Card.Text>
+                    <Card.Text className="description" placeholder={skill.title} >{skill.title}</Card.Text>
                     <ProgressBar className="scale" now={skill.level} label={`${skill.level}%`}  ></ProgressBar>
                     <button className="editBtn" onClick={() => this.getSkillForEdit(skill)} ><i className="fas fa-pen"></i></button>
-                    <button className="editBtn" onClick={() => this.handleDelete(skill)} ><i className="far fa-trash-alt"></i></button>
+                    <button className="editBtn" onClick={() => this.getSkillForDelete(skill)} ><i className="far fa-trash-alt"></i></button>
                     <br />
                 </div>
             })
@@ -140,7 +170,7 @@ export default class EditSkills extends Component {
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleCloseAdd}>
                             Close
-                     </Button>
+                        </Button>
                         <Button variant="primary" onClick={this.handleAdd}>Add</Button>
                     </Modal.Footer>
                 </Modal>
@@ -170,9 +200,33 @@ export default class EditSkills extends Component {
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleCloseEdit}>
                             Close
-                     </Button>
+                        </Button>
                         <Button variant="primary" onClick={this.handleEdit}>Edit</Button>
                     </Modal.Footer>
+                </Modal>
+                {/* DELETE MODAL CONFIRMATION */}
+                <Modal
+                bsPrefix="modal"
+                    size="sm"
+                    show={this.state.showDelete}
+                    onHide={this.handleCloseDelete}
+                    aria-labelledby="example-modal-sizes-title-sm"
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id="example-modal-sizes-title-sm">
+                            Please, confirm the delete action.
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Form>
+                        <Modal.Body>
+                            <Card.Text>{this.state.title}</Card.Text>
+                            <ProgressBar className="scale" now={this.state.level} label={`${this.state.level}%`}  ></ProgressBar>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={() => this.handleDelete()}>Yes</Button>
+                            <Button onClick={this.handleCloseDelete}>Close</Button>
+                        </Modal.Footer>
+                    </Form>
                 </Modal>
                 <hr className="dividing-line" />
             </Container>
