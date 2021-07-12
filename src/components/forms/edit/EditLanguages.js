@@ -130,7 +130,10 @@ export default class EditLanguages extends Component {
         return (
             <Container >
                 <br />
-                <Card.Title><i className="fas fa-globe" style={{ color: '#279081' }} ></i> Languages</Card.Title>
+                <Card.Title>
+                    <i className="fas fa-globe" style={{ color: '#279081' }} ></i>
+                    <span className="form-title" >Languages</span>
+                     </Card.Title>
                 {currLanguages}
                 <br />
                 <Button size="sm" type="button" onClick={this.handleShowAdd}><i className="fas fa-plus"></i></Button>

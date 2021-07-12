@@ -8,6 +8,7 @@ h1 {font-family: 'EB Garamond', serif,color-white}
 }
 
 .home-container-welcome{
+  width: 50%;
   margin-top: 20px;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -74,6 +75,7 @@ h1 {font-family: 'EB Garamond', serif,color-white}
   text-align: center;
   color: rgb(147 1 30);
 }
+
 
 @media screen and (max-width:640px) {
   .tip-title{

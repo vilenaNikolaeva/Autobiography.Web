@@ -18,7 +18,14 @@
     float: left;
     margin-top: 10px; 
   }
-
+.defaultImg_checkbox{
+  width: 45%;
+  padding-top: 20px;
+  font-size: large;
+  color: #31675b;
+  font-feature-settings: "smcp", "c2sc";
+  font-variant: all-small-caps;
+}
   @media screen and (max-width:770px){
     .image_crooper_container{
       display: flex;

@@ -8,7 +8,7 @@ export default class DisplayProfile extends Component {
         super(props);
         this.state = {
             userProfile: [],
-            imageSrc:null
+            imageSrc: null,
         }
     }
     componentDidMount() {
@@ -16,14 +16,16 @@ export default class DisplayProfile extends Component {
             .then(data => {
                 this.setState({
                     userProfile: data,
-                    imageSrc:data[0].imageSrc
+                    imageSrc: data[0].imageSrc,
                 })
-            })
+            });
     }
     render = () => {
         let info = this.state.userProfile.map((info, index) => {
             return <div key={index}>
-                <Figure.Image className="profile_image"  alt="Image" src={this.state.imageSrc ? this.state.imageSrc : defaultImageSrc}  />
+                <div className="profile_image_container">
+                    <Figure.Image className="profile_image" alt="Image" src={this.state.imageSrc ? this.state.imageSrc : defaultImageSrc} />
+                </div>
                 <Card.Text><i className="fas fa-user" style={{ color: '#279081' }} /><span className="user-name"> {info.username}</span></Card.Text>
                 <Card.Text><i className="fas fa-map-marker-alt" style={{ color: '#279081', marginRight: '5px' }} /> {info.address}</Card.Text>
                 <Card.Text><i className="fas fa-envelope-square" style={{ color: '#279081', marginRight: '7px' }} />{info.email}</Card.Text>

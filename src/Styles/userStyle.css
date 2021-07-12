@@ -4,9 +4,9 @@
     font-family: sans-serif;
   }
 .float-child1 {
-  width: 30%;
+  width: 26%;
   margin-top:8%;
-  margin-left:2% ;
+  margin-left:8% ;
   float: left;
   padding-left: 2.0rem !important;
   padding-right: 2.0rem !important;
@@ -16,9 +16,9 @@
   box-shadow: 5px 5px 5px 5px #5c8f7b;
 } 
 .float-child2 {
-  width: 62%;
+  width: 56%;
   margin-top:8%;
-  margin-right: 3%;
+  margin-right: 8%;
   float: right;
   padding-left: 2.0rem !important;
   padding-right: 2.0rem !important;
@@ -29,9 +29,9 @@
   box-shadow: 5px 5px 5px 5px #5c8f7b;;
 } 
 .float-child3 {
-  width: 62%;
+  width: 56%;
   margin-top:2%;
-  margin-right: 3%;
+  margin-right: 8%;
   float: right;
   padding:20px;
   padding-left: 2.0rem !important;
@@ -71,14 +71,21 @@
 .form-title{
   font-size: 30px;
   font-weight: bold;
+  font-variant: all-small-caps;
   color:rgb(87, 85, 85);
 }
+.profile_image_container{
+  margin-bottom: 20px;
+}
 .profile_image{
-  width: 220px;
-  height: 220px;
-  margin-left: 20px;
   border-radius: 20px;
   box-shadow: -1px 0px 18px 3px #80918b;
+}
+.isItPublic_checkbox{
+  margin-left: 30px;
+  font-size: x-large;
+  color: #31675b;
+  font-variant: all-small-caps;
 }
 .user-name{
   font-size:25px;

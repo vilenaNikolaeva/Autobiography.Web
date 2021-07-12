@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { Container, FormControl, Button, Card, Form, Modal, Figure } from 'react-bootstrap';
-// import ReactCrop from 'react-image-crop';
-// import 'react-image-crop/dist/ReactCrop.css';
-
 import requester from './../../../infrastructure/requester';
 import Error from './../../errorMessage/Error';
 import defaultImageSrc from '../../../images/blank-profile-picture.png';
-import { isWithinInterval } from 'date-fns';
-// import { image64toCanvasRef, extractImageFileExtentionBase64, base64StringtoFile } from './ImageCropper';
 import ImageCropper from './ImageCropper'
-import { PropTypes } from 'prop-types';
+import { Route, Link, Redirect } from 'react-router-dom';
+import SharedResumePage from './../../../shared/SharedResumePage';
 
 export default class EditProfile extends Component {
     constructor(props) {
@@ -23,6 +19,7 @@ export default class EditProfile extends Component {
             imageFile: null,
             imageSrc: null,
             description: null,
+            isItPublic: false,
             error: null,
             showEdit: false,
             showImage: false
@@ -48,7 +45,9 @@ export default class EditProfile extends Component {
             email: this.state.email,
             link: this.state.link,
             imageFile: this.state.imageFile,
+            imageSrc:this.state.imageSrc,
             description: this.state.description,
+            isItPublic: this.state.isItPublic
         };
         let formData = new FormData();
         formData.append('imageFile', this.state.imageFile);
@@ -58,17 +57,9 @@ export default class EditProfile extends Component {
         formData.append('email', this.state.email);
         formData.append('link', this.state.link);
         formData.append('description', this.state.description);
+        formData.append('isItPublic', this.state.isItPublic);
 
-        fetch(`https://localhost:44311/api/User/${this.props.userId}`, {
-            method: 'PUT',
-            headers: {
-                'Authorization': 'Bearer ' + sessionStorage.token
-            },
-            body: formData
-        })
-            .then(res =>
-                res.json()
-            )
+        requester.putFormData(`User/${this.props.userId}`, formData)
             .then(data => {
                 this.setState({
                     username: data.username,
@@ -76,7 +67,8 @@ export default class EditProfile extends Component {
                     email: data.email,
                     link: data.link,
                     description: data.description,
-                    imageFile: data.imageFile,
+                    isItPublic: data.isItPublic,
+                    imageFile: data.imageFile ,
                     imageSrc: data.imageSrc,
                     showEdit: false
                 });
@@ -94,6 +86,7 @@ export default class EditProfile extends Component {
                     email: data[0].email,
                     link: data[0].link,
                     description: data[0].description,
+                    isItPublic: data[0].isItPublic,
                     imageSrc: data[0].imageSrc,
                 });
             })
@@ -101,16 +94,36 @@ export default class EditProfile extends Component {
                 this.setState({ error: err })
             })
     }
-
-    setImageFileState = (file) => {
-        this.setState({ imageFile: file, showEdit: true })
+    setImageFileState = (file, imageSrc) => {
+        if (file == null) {
+            this.setState({ imageFile: file, imageSrc: null, showEdit: true })
+        }
+        else {
+            this.setState({ imageFile: file, showEdit: true })
+        }
     }
+    displaySharedLink = () => {
+        if (this.state.isItPublic === true) {
 
+            return <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
+                <div className="shared_link">
+                    <Link to={`/sharedResume/${this.props.userId}`} >Shared Link</Link>
+                </div>
+                <div>
+                    <Button onClick={() => { navigator.clipboard.writeText(`http://localhost:3002/sharedResume/${this.props.userId}`) }} variant="outline-success">Copy Link</Button>
+                </div>
+            </div>;
+        }
+    }
     render = () => {
         return (
             <Container >
                 <br />
-                <Figure.Image className="profile_image"  alt="Image" src={this.state.imageSrc ? this.state.imageSrc : defaultImageSrc}  />
+
+                {this.displaySharedLink()}
+                <div className="profile_image_container">
+                    <Figure.Image className="profile_image" width={171} height={180} alt="Image" src={this.state.imageSrc ? this.state.imageSrc : defaultImageSrc} />
+                </div>
                 <Card.Text className="user-name"><i className="fas fa-user " style={{ color: '#279081' }} /> {this.state.username} </Card.Text>
                 <Card.Text className="description"><i className="fas fa-map-marker-alt" style={{ color: '#279081', marginRight: '5px' }} /> {this.state.address}</Card.Text>
                 <Card.Text className="description"><i className="fas fa-envelope-square" style={{ color: '#279081', marginRight: '7px' }} />{this.state.email}</Card.Text>
@@ -118,7 +131,7 @@ export default class EditProfile extends Component {
                 <Card.Text className="description"><i className="fas fa-info" style={{ color: '#279081', marginRight: '5px' }} /> {this.state.description}</Card.Text>
                 <button className="editBtn" type="button" onClick={this.handleShowEdit}><i className="fas fa-pen"></i></button>
                 <br />
-                <Modal 
+                <Modal
                     size="xl"
                     show={this.state.showEdit}
                     onHide={this.handleCloseAdd}
@@ -130,6 +143,13 @@ export default class EditProfile extends Component {
                     <Modal.Body>
                         <div style={{ display: 'flex' }}>
                             <Form as="form" className="profile_edit_form" autoComplete="off" noValidate onSubmit={this.handleEditProfile}>
+                                <Form.Check
+                                    name="isItPublic"
+                                    className="isItPublic_checkbox"
+                                    checked={this.state.isItPublic ? "checked" : null}
+                                    defaultValue={this.state.isItPublic}
+                                    onClick={() => this.setState({ isItPublic: !this.state.isItPublic })}
+                                    label="Share your resume with others." />
                                 <Form.Group className="mb-3">
                                     <Form.Label className="col-form-label">Username:</Form.Label>
                                     <FormControl name="username" defaultValue={this.state.username} onChange={(e) => this.handleChange(e)} ></FormControl>
@@ -156,7 +176,7 @@ export default class EditProfile extends Component {
                                     <Button variant="primary" type="submit" >Edit</Button>
                                 </Modal.Footer>
                             </Form>
-                            <ImageCropper onSetImageFileState={this.setImageFileState}></ImageCropper>
+                            <ImageCropper  onSetImageFileState={this.setImageFileState}></ImageCropper>
                         </div>
                     </Modal.Body>
                 </Modal>

@@ -8,14 +8,28 @@ export default class ExampleCv extends Component {
     render = () => {
         return (
             <Container className="main-exe-cv-container">
-                <Card.Title as="h5" className="message-question">Not sure how to start?! </Card.Title>
+                <Card.Title as="label" className="message-question">Not sure how to start?! </Card.Title>
                 <div as="div" className="message-container">
-                    <Card.Title as="h4" className="message-title">Help yourself with the example below.</Card.Title>
+                    <Card.Title as="label" className="message-title">Help yourself with the example below.</Card.Title>
+                </div>
+                <div id="arrowAnim">
+                    <div className="arrowSliding">
+                        <div className="arrow"></div>
+                    </div>
+                    <div className="arrowSliding delay1">
+                        <div className="arrow"></div>
+                    </div>
+                    <div className="arrowSliding delay2">
+                        <div className="arrow"></div>
+                    </div>
+                    <div className="arrowSliding delay3">
+                        <div className="arrow"></div>
+                    </div>
                 </div>
                 <div as="div" className="exe-cv-container">
                     <div className="exe-cv">
                         <div className="exe-cv-container1">
-                            <Figure.Image className="avatar_image" width={171} height={180} alt="Avatar" src={defaultImage}  />
+                            <Figure.Image className="avatar_image" width={171} height={180} alt="Avatar" src={defaultImage} />
                             <br />
                             <Card.Text><i className="fas fa-user" style={{ color: '#279081' }} /><span className="userName">Serena Johnson</span></Card.Text>
                             <Card.Text><i className="fas fa-map-marker-alt" style={{ color: '#279081', marginRight: '3px' }} />London, Richmond</Card.Text>

@@ -30,6 +30,7 @@ function post(endpoint, data) {
         .then(res => res.json())
         .catch(err => console.log(err));
 }
+//Function to return PUT promise
 function put(endpoint, data) {
     return fetch(BASE_URL + endpoint, {
         method: 'PUT',
@@ -38,6 +39,18 @@ function put(endpoint, data) {
             'Authorization': getToken()
         },
         body: JSON.stringify(data)
+    })
+        .then(res => res.json())
+        .catch(err => console.log(err));
+}
+//Function to return PUT FormData promise
+function putFormData(endpoint, formData) {
+    return fetch(BASE_URL + endpoint, {
+        method: 'PUT',
+        headers: {
+            'Authorization': getToken()
+        },
+        body: formData
     })
         .then(res => res.json())
         .catch(err => console.log(err));
@@ -60,6 +73,7 @@ let requester = {
     get,
     post,
     put,
+    putFormData,
     remove
 };
 

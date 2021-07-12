@@ -1,0 +1,27 @@
+.notFound_page_container{
+    display: flex;
+    margin-top: 30%;
+    margin-bottom: 10%;
+}
+.notFound_image{
+    margin-left: 20%;
+}
+.notFound_text{
+    font-variant: all-petite-caps;
+    align-self: center;
+    font-size: x-large;
+}
+.link{
+    text-decoration: underline;
+    padding-left: 10px;
+    color:rgb(204, 226, 217);
+    font-size: xxx-large;
+}
+.link:hover{
+    border:3px solid #1aaa45; 
+    padding: 1%;
+    width: 50%;
+    border-radius: 10px;;
+    color:aliceblue;
+    background:none;
+}

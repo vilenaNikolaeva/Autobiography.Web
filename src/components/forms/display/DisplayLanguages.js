@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import { Container, Card,ProgressBar } from 'react-bootstrap';
+import { Container, Card, ProgressBar } from 'react-bootstrap';
 import requester from '../../../infrastructure/requester';
 
 export default class DisplayLanguages extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            userLanguages:[]
+        this.state = {
+            userLanguages: []
         }
     }
-    componentDidMount(){
-         requester.get(`user/${this.props.userId}/languages`)
-         .then(data => {
-             this.setState({ userLanguages: data })
-         });
+    componentDidMount() {
+        requester.get(`user/${this.props.userId}/languages`)
+            .then(data => {
+                this.setState({ userLanguages: data })
+            });
     }
     render = () => {
         let languages = this.state.userLanguages.map((language, index) => {
@@ -25,7 +25,10 @@ export default class DisplayLanguages extends Component {
         return (
             <Container >
                 <br />
-                <Card.Title><i className="fas fa-globe" style={{color:'#279081'}} ></i>  Languages</Card.Title>
+                <Card.Title>
+                    <i className="fas fa-globe" style={{ color: '#279081' }} ></i>
+                    <span className="form-title" >Languages</span>
+                </Card.Title>
                 {languages}
                 <hr className="dividing-line" />
             </Container>

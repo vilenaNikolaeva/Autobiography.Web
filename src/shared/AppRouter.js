@@ -7,7 +7,8 @@ import Logout from './../components/user/Logout';
 import EditUser from './../components/forms/edit/EditUser';
 import PersonalResume from '../components/common/PersonalResume';
 import { USER_ID } from '../infrastructure/constants';
-import ImageCropper from './../components/forms/edit/ImageCropper';
+import SharedResumePage from './SharedResumePage';
+import NotFoundPage from '../components/errorPage/NotFoundPage';
 
 export default class AppRouter extends Component {
   render = () => {
@@ -17,6 +18,7 @@ export default class AppRouter extends Component {
       <Fragment>
         <Route path="/myResume"><PersonalResume isUserLoggedIn={loggedIn}></PersonalResume></Route>
         <Route path="/edit"><EditUser userId={sessionStorage.getItem(USER_ID)} /></Route>
+        {/* <Route path="/sharedResume/:id" render={(props) => <SharedResumePage {...props} />}></Route> */}
         <Route path="/logout"><Logout onLoginChange={this.props.onLoginChange}></Logout></Route>
       </Fragment>
 
@@ -29,6 +31,8 @@ export default class AppRouter extends Component {
     return (
       <Switch >
         <Route exact path="/"><Home isUserLoggedIn={loggedIn} /></Route>
+        <Route path="/sharedResume/:id" render={(props) => <SharedResumePage {...props} />}></Route>
+        <Route path="/404"><NotFoundPage/></Route>
         {loggedIn ? (userNavbarRoute) : (guestNavBarRoute)}
       </Switch>
     )

@@ -140,7 +140,10 @@ export default class EditSkills extends Component {
             <Container>
                 <hr />
                 <br />
-                <Card.Title><i className="fas fa-cog" style={{ color: '#279081' }} ></i> Skills</Card.Title>
+                <Card.Title>
+                    <i className="fas fa-cog" style={{ color: '#279081' }} ></i>
+                    <span className="form-title" >Skills</span>
+                     </Card.Title>
                 {currentSkills}
                 <br />
                 <Button size="sm" type="button" onClick={this.handleShowAdd} ><i className="fas fa-plus"></i></Button>

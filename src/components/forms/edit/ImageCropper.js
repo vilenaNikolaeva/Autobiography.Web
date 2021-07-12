@@ -2,22 +2,23 @@ import React from "react";
 import "cropperjs/dist/cropper.min.css";
 import Cropper from "react-cropper";
 import "./../../../Styles/imagecropper.css"
-import { Button, Container, Figure } from 'react-bootstrap';
+import { Button, Container, Figure, Form } from 'react-bootstrap';
 import defaultImageSrc from './../../../images/blank-profile-picture.png'
 import Error from './../../errorMessage/Error';
 
 class ImageCropper extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log(props);
     this.state = {
-      imageDestination: "",
       imageSrc: "",
       image: "",
       cropData: "",
       cropper: "",
       imageFile: "",
       showBtn: false,
-      error: ""
+      checked: false,
+      error: "",
     };
     this.imageElement = React.createRef();
   }
@@ -44,11 +45,13 @@ class ImageCropper extends React.Component {
     } else if (e.target) {
       files = e.target.files;
     }
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.setState({ image: reader.result, showBtn: true });
-    };
-    reader.readAsDataURL(files[0]);
+    if (files.length !== 0) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.setState({ image: reader.result, showBtn: true });
+      };
+      reader.readAsDataURL(files[0]);
+    }
   }
 
   getCropData = () => {
@@ -65,7 +68,19 @@ class ImageCropper extends React.Component {
       return <Error>Please, first choose photo.</Error>
     }
   };
-
+  resetState = () => {
+    this.setState({
+      imageSrc: "",
+      image: "",
+      cropData: "",
+      cropper: "",
+      imageFile: "",
+      showBtn: false,
+      checked: false,
+      error: ""
+    });
+    this.props.onSetImageFileState(null, this.state.imageSrc);
+  }
   render() {
     return (
       <Container as="div" className="image_crooper_container">
@@ -93,6 +108,15 @@ class ImageCropper extends React.Component {
           <Figure.Image className="cropped_image" src={this.state.cropData ? this.state.cropData : defaultImageSrc} alt="cropped" roundedCircle />
           <div className="input_file_container">
             <input type="file" className="input_file" onChange={this.handleFileUpload} />
+          </div>
+          <div>
+            <Form.Check
+              name="defaultPicture"
+              className="defaultImg_checkbox"
+              checked={this.state.checked ? "checked" : null}
+              onClick={() => this.setState({ cropData: defaultImageSrc })}
+              onChange={this.resetState}
+              label="Click HERE if you don't want to upload image." />
           </div>
         </div>
         <div className="cropper_button">

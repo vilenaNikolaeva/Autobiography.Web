@@ -15,11 +15,12 @@ export default class Home extends Component {
         return (
             <Card.Body  bsPrefix="div" className="body-homeContainer">
                 <Card.Text className="home-container">
-                    <Card.Title as="h3" className="home-container-welcome">Easy-Peasy ..Try with us!</Card.Title>
+                    <Card.Title as="h2" className="home-container-welcome">Need to build your resume?</Card.Title>
+                    <Card.Title as="h2" className="home-container-welcome">...Easy-Peasy ..Try with us!</Card.Title>
                 </Card.Text>
                     {this.displayGetStartedButton()}
                 <Card.Text className="info-container">
-                    <Card.Title as="h5" className="info-home-title">Check out those tips before you get start.</Card.Title>
+                    <Card.Title as="h3" className="info-home-title">Check out those tips before you get start.</Card.Title>
                 </Card.Text>
                 <Tips />
                 <ExampleCv/>
