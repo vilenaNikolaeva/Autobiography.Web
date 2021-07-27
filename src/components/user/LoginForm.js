@@ -69,7 +69,7 @@ class LoginForm extends Component {
             <FormControl type="password" name="password" onChange={this.handleChange} placeholder="Password..." autoComplete="on" />
           </Form.Group>
           <Form.Group className="login-form-control">
-            <button type="btn btn-sumbit" onClick={this.handleSubmit} value="Login" ><b>Login</b></button>
+          <button className="login-form-control" type="btn btn-sumbit" onClick={this.handleSubmit} value="Login" ><b>Login</b></button>
           </Form.Group>
         </div>
       </Form>

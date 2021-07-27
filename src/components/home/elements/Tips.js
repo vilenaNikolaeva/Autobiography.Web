@@ -1,12 +1,13 @@
-import { Carousel, Container } from 'react-bootstrap';
 import React, { Component } from 'react';
+import '../../../Styles/tips.css';
+import { Carousel, Container } from 'react-bootstrap';
 
 export default class Tips extends Component {
   render = () => {
     return (
-      <Container as="div" className="tip-container" >
+      <Container className="tip-container" >
         <Carousel as="div" className="carousel-container">
-        <Carousel.Item  interval={100000}>
+          <Carousel.Item interval={100000}>
             <Carousel.Caption as="div" className="caption-container" >
               <h4 className="tip-title">Keep it real</h4>
               <p className="tip-article">
@@ -18,7 +19,7 @@ export default class Tips extends Component {
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item inerval={100000}>
-            <Carousel.Caption  as="div" className="caption-container" >
+            <Carousel.Caption as="div" className="caption-container" >
               <h4 className="tip-title" >Tailor it </h4>
               <p className="tip-article">
                 We’ve all done it. Whizzed the same CV out to lots of employers to save time… Stop! Take the time to
@@ -50,7 +51,7 @@ export default class Tips extends Component {
               </p>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item  inerval={100000}>
+          <Carousel.Item inerval={100000}>
             <Carousel.Caption as="div" className="caption-container" >
               <h4 className="tip-title">Keep it current </h4>
               <p className="tip-article">

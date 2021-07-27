@@ -4,7 +4,9 @@
   position: relative;
   width: 100%;
   }
-  
+ .register-container{
+  width: 70%;
+  }
 .register-form-control{
   margin: 7px auto;
   padding: 1%;
@@ -43,22 +45,14 @@
     color:#ff9913;
     font-style: italic;
   }
-
-@media (min-width: 576px){
-.container, .container-sm {
-    max-width: inherit !important
+  @media screen and (min-width:1024px) {
+    .register-container {
+      width: 80%;
+      margin-left: 10%;
+      }
   }
-}
-@media screen and (max-width:340px) {
-  .Register {
-    margin-top:30%;
-    margin-bottom: 10%;
-    position: relative;
+@media screen and (max-width:780px) {
+  .register-container {
     width: 100%;
     }
- }
- @media screen and (max-width:780px) {
-  .Register {
-    margin-top: 20%;
-    }
- }
+}

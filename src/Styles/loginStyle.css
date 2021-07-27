@@ -35,34 +35,51 @@
   text-align: center;
   color:#143120;
   }
-  .login_container{
+.login_container{
+    width: 70%;
     margin-top:10%;
     padding-left: 10%;
     padding-right: 10%;
+}
+ 
+@media screen and (min-width:780px) {
+   .Login {
+     margin-top: 10%;
+     margin-bottom: 20%;
+    }
+}
+  @media screen and (min-width:2560px) {
+    .login-container{
+      width:70%;
+      margin-left: 15%;
+    }
   }
-  
+ @media screen and (max-width:2560px){
+     .login-container{
+       width:70%;
+       margin-left: 15%;
+     }
+  }
  @media screen and (max-width:780px) {
   .Login {
     margin-top: 20%;
-    margin-bottom: 50%;
+    margin-bottom: 30%;
     }
  }
-@media screen and (max-width:430px) {
+ 
+@media screen and (max-width:560px) {
   .Login {
-    margin-top:100%;
-    margin-bottom: 20%;
+    margin-top: 40%;
+    margin-bottom: 50%;
+    padding-left: 10%;
+    padding-right: 10%;
     position: relative;
     width: 100%;
     }
  }
- @media screen and (max-width:380px) {
-   .Login{
-    margin-top: 40%;
-    margin-bottom: 50%;
-   }
-  .login_container{
-    margin-top:10%;
-    padding-left: 10%;
-    padding-right: 10%;
-  }
+ @media screen and (max-width:320px) {
+  .login-container {
+      width: 100%;
+      margin-left: 0%;
+    }
  }

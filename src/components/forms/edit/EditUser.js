@@ -12,7 +12,7 @@ export default class EditUser extends Component {
     render = () => {
         return (
             <div className="home-container" >
-                <h1 className="home-container-welcome">JUST EDIT</h1>
+                <h1 className="home-container-welcome2">JUST EDIT</h1>
                 <Card.Body className="float-child1">
                     <EditProfile userId={this.props.userId}></EditProfile>
                     <EditSkills userId={this.props.userId}></EditSkills>

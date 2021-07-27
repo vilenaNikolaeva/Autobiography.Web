@@ -11,7 +11,7 @@ export default class PersonalResume extends Component{
     render = () => {
         return (    
             <div className="home-container">
-                <h1 className="home-container-welcome">YOUR RESUME</h1>
+                <h1 className="home-container-welcome2">YOUR RESUME</h1>
                 {this.displayUserCV()}
             </div>
         )

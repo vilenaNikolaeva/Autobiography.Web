@@ -53,25 +53,27 @@ export default class RegisterForm extends Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit} className="Register">
-        <Card.Title as="h3" className="register-title">Register</Card.Title>
-        <Error error={this.state.error}></Error>
-        <Form.Group className="register-form-control">
-          <FormControl type="text" placeholder="Username..." name="username" id="username" required onChange={this.handleChange} />
-        </Form.Group>
-        <Form.Group className="register-form-control">
-          <FormControl type="email" placeholder="Email..." name="email" id="email" required onChange={this.handleChange} />
-        </Form.Group>
-        <p className="mandatory-combination">***Mandatory password combinations :
-          <p>Contain upper and lowercase, have digits, Punctuation characters!</p></p>
-        <Form.Group className='register-form-control'>
-          <FormControl type="password" placeholder="Password at least 8 symbols..." name="password" id="psw" required autoComplete="on" onChange={this.handleChange} />
-        </Form.Group>
-        <Form.Group className="register-form-control">
-          <FormControl type="password" placeholder="Repeat Password..." name="repeatedPassword" autoComplete="on" id="psw-repeat" required onChange={this.handleChange} />
-        </Form.Group>
-        <Form.Group className="register-form-control">
-          <button type="btn btn-sumbit" value="Register" ><b>Register</b> </button>
-        </Form.Group>
+        <div className="register-container">
+          <Card.Title as="h3" className="register-title">Register</Card.Title>
+          <Error error={this.state.error}></Error>
+          <Form.Group className="register-form-control">
+            <FormControl type="text" placeholder="Username..." name="username" id="username" required onChange={this.handleChange} />
+          </Form.Group>
+          <Form.Group className="register-form-control">
+            <FormControl type="email" placeholder="Email..." name="email" id="email" required onChange={this.handleChange} />
+          </Form.Group>
+          <p className="mandatory-combination">***Mandatory password combinations :
+            <p>Contain upper and lowercase, have digits, Punctuation characters!</p></p>
+          <Form.Group className='register-form-control'>
+            <FormControl type="password" placeholder="Password at least 8 symbols..." name="password" id="psw" required autoComplete="on" onChange={this.handleChange} />
+          </Form.Group>
+          <Form.Group className="register-form-control">
+            <FormControl type="password" placeholder="Repeat Password..." name="repeatedPassword" autoComplete="on" id="psw-repeat" required onChange={this.handleChange} />
+          </Form.Group>
+          <Form.Group className="register-form-control">
+            <button type="btn btn-sumbit" value="Register" ><b>Register</b> </button>
+          </Form.Group>
+        </div>
       </Form>
     )
   }

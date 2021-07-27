@@ -24,6 +24,7 @@ export default class DisplayUserResume extends Component {
         return <Card.Text className="calendar">{Moment(endDate).format('MMM DD YYYY')}</Card.Text>
     }
     componentDidMount() {
+        console.log(this.props.userId);
         requester.get(`UserResume/${this.props.userId}`)
             .then(data => {
                 if (data.length > 0) {

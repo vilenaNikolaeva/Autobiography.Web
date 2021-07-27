@@ -11,6 +11,11 @@ export default class DisplayProfile extends Component {
             imageSrc: null,
         }
     }
+    showUserPhoneNumber = (phone) => {
+        if (phone !== null) {
+            return <Card.Text ><i class="fas fa-phone" style={{ color: '#279081', marginRight: '7px' }} />{phone}</Card.Text>
+        }
+    }
     componentDidMount() {
         requester.get(`user/${this.props.userId}`)
             .then(data => {
@@ -28,6 +33,7 @@ export default class DisplayProfile extends Component {
                 </div>
                 <Card.Text><i className="fas fa-user" style={{ color: '#279081' }} /><span className="user-name"> {info.username}</span></Card.Text>
                 <Card.Text><i className="fas fa-map-marker-alt" style={{ color: '#279081', marginRight: '5px' }} /> {info.address}</Card.Text>
+                {this.showUserPhoneNumber(info.phone)}
                 <Card.Text><i className="fas fa-envelope-square" style={{ color: '#279081', marginRight: '7px' }} />{info.email}</Card.Text>
                 <Card.Link href="#"><i className="fas fa-link" /> {info.link}</Card.Link>
                 <Card.Text><i className="fas fa-info" style={{ color: '#279081', marginRight: '5px' }} /> {info.description}</Card.Text>

@@ -20,17 +20,19 @@ export default class SharedResumePage extends Component {
         }
     }
     componentDidMount = () => {
-        const userId = window.location.pathname.split('/')[2];
-        console.log(userId);
         requester.get(`UserResume/${this.state.userId}`)
             .then(data => {
+                console.log(data);
                 const { history } = this.props;
-                if(data=== undefined){
+                if (data === undefined) {
+                    return history.push('/404');
+                }
+                else if (data.status === 404) {
                     return history.push('/404');
                 }
                 else if (data.length > 0) {
                     console.log(`component: ${data.id}`);
-                    return this.setState({ isItPublic: true});
+                    return this.setState({ isItPublic: true });
                 }
             })
             .catch(err => {
