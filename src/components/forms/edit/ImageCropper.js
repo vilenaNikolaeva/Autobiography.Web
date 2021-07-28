@@ -58,9 +58,10 @@ class ImageCropper extends React.Component {
     if (typeof this.state.cropper !== "undefined") {
       let imageBase64 = this.state.cropper.getCroppedCanvas().toDataURL();
       let file = this.base64StringtoFile(imageBase64, "file_for_upload");
-      // if(file.size>"100000"){
-      //   return this.setState({error: "Maximum allowed file size is 100 000 bytes."})
-      // }
+      if (file.size > "10485760") {
+        return this.setState({ error: "Maximum allowed file size is 100 000 bytes." })
+      }
+
       this.setState({ cropData: this.state.cropper.getCroppedCanvas().toDataURL(), error: "" });
       this.props.onSetImageFileState(file);
     }
@@ -79,7 +80,7 @@ class ImageCropper extends React.Component {
       checked: false,
       error: ""
     });
-    this.props.onSetImageFileState(null, this.state.imageSrc);
+    this.props.onSetImageFileState(null);
   }
   render() {
     return (
@@ -93,8 +94,6 @@ class ImageCropper extends React.Component {
           preview=".img-preview"
           src={this.state.image}
           viewMode={1}
-          // minCropBoxHeight={10}
-          // minCropBoxWidth={10}
           background={false}
           responsive={true}
           autoCropArea={1}

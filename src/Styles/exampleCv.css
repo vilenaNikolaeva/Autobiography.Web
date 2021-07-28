@@ -1,39 +1,14 @@
 .main-exe-cv-container{
   margin-top: 15%;
-  font-size: x-small;
+  font-size: small;
   font-style: italic;
 }
 .exe-cv-container{
-    margin-top: 3%;
-    float: right;
     margin-right: 0px;
-    width: 75% ;
+    width: 100%;
     justify-content: space-evenly;
     text-align:justify;
     font-family: sans-serif;
-}
-.message-container{
-  margin-top: 5%;
-  float: left;
-  width: 20%;
-}
-.message-question{
-  color: rgb(23, 73, 62);
-  font-style: oblique;
-  font-weight: bold;
-  font-size: xxx-large;
-}
-.message-title{
-  color:orange;
-  font-style: oblique;
-  font-weight: bold;
-  font-size: xx-large;
-  margin-bottom: 20%;
-}
-.message-text{
-  color: rgb(216, 143, 60);
-  text-align: center;
-  font-style: italic;
 }
 .userName{
   font-size: 20px;
@@ -95,49 +70,13 @@
     background-image: url("../images/background.jpg");
     box-shadow: 5px 5px 5px 5px #5c8f7b;;
   }
-  .arrow {
-    margin-top:500%;
-    width: 5vw;
-    height: 5vw;
-    border: 2.5vw solid;
-    border-color: black transparent transparent black;
-    transform: rotate(137deg);
-  }
-  
-  
-  .arrowSliding {
-    position: absolute;
-    -webkit-animation: slide 4s linear infinite; 
-            animation: slide 4s linear infinite;
-  }
-  
-  .delay1 {
-    -webkit-animation-delay: 1s; 
-      animation-delay: 1s;
-  }
-  .delay2 {
-    -webkit-animation-delay: 2s; 
-      animation-delay: 2s;
-  }
-  .delay3 {
-    -webkit-animation-delay: 3s; 
-      animation-delay: 3s;
-  }
-  
-  @-webkit-keyframes slide {
-      0% { opacity:0; transform: translateX(15vw); }	
-     20% { opacity:1; transform: translateX(9vw); }	
-     80% { opacity:1; transform: translateX(-9vw); }	
-    100% { opacity:0; transform: translateX(-15vw); }	
-  }
-  @keyframes slide {
-      0% { opacity:0; transform: translateX(15vw); }	
-     20% { opacity:1; transform: translateX(9vw); }	
-     80% { opacity:1; transform: translateX(-9vw); }	
-    100% { opacity:0; transform: translateX(-15vw); }	
+@media screen and (min-width:1440px) {
+    /* .message-question{
+      font-size: 80px;
+    } */
   }
 @media screen and (max-width:340px) {
-  .message-container{
+  /* .message-container{
     float: inherit;
     width: inherit;
   }
@@ -153,7 +92,7 @@
   }
   .message-text{
     font-size: larger;
-  }
+  } */
   .exe-cv-container1{
     width: 100%;
     margin-left: 4%;
@@ -182,38 +121,21 @@
  }
  
 @media screen and (max-width:780px) {
-  .message-container{
-    float: inherit;
-    width: inherit;
-  }
-  .exe-cv-container{
-    width: inherit;
-    margin-right: 3%;
-  }
-  .message-question{
-    color: orange;
-  }
-  .message-title{
-    color: #203838;
-  }
-  .message-text{
-    font-size: larger;
-  }
   .exe-cv-container1{
-    width: 100%;
+    width: 90%;
     margin-left: 4%;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
    }
    .exe-cv-container2{
-     width: 100%;
+     width: 90%;
      float: left;
      margin-left: 4%;
      border-top-left-radius: 10px;
      border-bottom-left-radius: 10px;
    }
    .exe-cv-container3{
-     width: 100%;
+     width: 90%;
      float: left;
      margin-top:8%;
      margin-left: 4%;
@@ -225,6 +147,14 @@
     height: 140px;
     margin-bottom: .3rem;
    }
+ }
+ @media screen and (max-width:425px) {
+  .exe-cv-container1 ,
+  .exe-cv-container2, 
+  .exe-cv-container3 {
+    width: 85%;
+    margin-left: 7%;
+  }
  }
 
   

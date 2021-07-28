@@ -76,7 +76,7 @@ export default class EditEducation extends Component {
             return this.setState({ [name]: true, endDate: new Date() });
         }
         else if (name === 'endDate') {
-            return this.setState({ present: null });
+           this.setState({ present: false });
         }
 
         this.setState({ [name]: value });

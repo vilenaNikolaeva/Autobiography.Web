@@ -1,14 +1,26 @@
 .footer-container {
-  position: absolute;
-    background-color: orange;
+    width: 100%;
+    position: absolute;
+    background-color: #0f333a;
     border-top: 2px solid cadetblue;
+  }
+  .footer-items{
+    justify-content: center;
+    margin-top: 3%;
+    display: flex;
   }
   .container{
     padding-left: 0% !important;
     padding-right: 0% !important;
   }
-  @media screen and (max-width:340px) {
+  @media screen and (max-width:3440px) {
+    .footer-container {
+      margin-top:5%;
+      }
+   }
+   @media screen and (max-width:340px) {
     .footer-container {
       margin-top:50%;
       }
    }
+ 

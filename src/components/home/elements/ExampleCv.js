@@ -3,29 +3,18 @@ import { Card, Figure, ProgressBar, Container } from 'react-bootstrap';
 import Moment from 'moment';
 import '../../../Styles/exampleCv.css'
 import defaultImage from '../../../images/blank-profile-picture.png'
+import StepByStep from './StepByStep';
 
 export default class ExampleCv extends Component {
     render = () => {
         return (
             <Container className="main-exe-cv-container">
-                <Card.Title as="label" className="message-question">Not sure how to start?! </Card.Title>
+                {/* <Card.Title as="label" className="message-question">Not sure how to start?! </Card.Title>
+                <StepByStep />
                 <div as="div" className="message-container">
-                    <Card.Title as="label" className="message-title">Help yourself with the example below.</Card.Title>
-                </div>
-                <div id="arrowAnim">
-                    <div className="arrowSliding">
-                        <div className="arrow"></div>
-                    </div>
-                    <div className="arrowSliding delay1">
-                        <div className="arrow"></div>
-                    </div>
-                    <div className="arrowSliding delay2">
-                        <div className="arrow"></div>
-                    </div>
-                    <div className="arrowSliding delay3">
-                        <div className="arrow"></div>
-                    </div>
-                </div>
+                    <Card.Title as="label" className="message-title">Click and Help yourself with the example.</Card.Title>
+                    <button href="/exampleCv" id="exampleCvBtn"></button>
+                </div> */}
                 <div as="div" className="exe-cv-container">
                     <div className="exe-cv">
                         <div className="exe-cv-container1">

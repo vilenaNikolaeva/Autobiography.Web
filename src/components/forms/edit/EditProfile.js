@@ -14,6 +14,7 @@ export default class EditProfile extends Component {
         this.state = {
             username: null,
             address: null,
+            phone: null,
             email: null,
             link: null,
             imageFile: null,
@@ -42,10 +43,11 @@ export default class EditProfile extends Component {
         const data = {
             username: this.state.username,
             address: this.state.address,
+            phone: this.state.phone,
             email: this.state.email,
             link: this.state.link,
             imageFile: this.state.imageFile,
-            imageSrc:this.state.imageSrc,
+            imageSrc: this.state.imageSrc,
             description: this.state.description,
             isItPublic: this.state.isItPublic
         };
@@ -54,6 +56,7 @@ export default class EditProfile extends Component {
         formData.append('imageSrc', this.state.imageSrc);
         formData.append('username', this.state.username);
         formData.append('address', this.state.address);
+        formData.append('phone', this.state.phone);
         formData.append('email', this.state.email);
         formData.append('link', this.state.link);
         formData.append('description', this.state.description);
@@ -64,12 +67,13 @@ export default class EditProfile extends Component {
                 this.setState({
                     username: data.username,
                     address: data.address,
+                    phone: data.phone,
                     email: data.email,
                     link: data.link,
                     description: data.description,
                     isItPublic: data.isItPublic,
-                    imageFile: data.imageFile ,
-                    imageSrc: data.imageSrc,
+                    imageFile: data.imageFile,
+                    imageSrc: data.imageSrc ? data.imageSrc : defaultImageSrc,
                     showEdit: false
                 });
             })
@@ -83,23 +87,32 @@ export default class EditProfile extends Component {
                 this.setState({
                     username: data[0].username,
                     address: data[0].address,
+                    phone: data[0].phone,
                     email: data[0].email,
                     link: data[0].link,
                     description: data[0].description,
                     isItPublic: data[0].isItPublic,
                     imageSrc: data[0].imageSrc,
                 });
+                if (this.state.imageSrc == null) {
+                    this.setState({ imageSrc: defaultImageSrc });
+                }
             })
             .catch(err => {
                 this.setState({ error: err })
             })
     }
-    setImageFileState = (file, imageSrc) => {
+    setImageFileState = (file) => {
         if (file == null) {
             this.setState({ imageFile: file, imageSrc: null, showEdit: true })
         }
         else {
             this.setState({ imageFile: file, showEdit: true })
+        }
+    }
+    showUserPhoneNumber = () => {
+        if (this.state.phone !== null) {
+            return <Card.Text ><i class="fas fa-phone" style={{ color: '#279081', marginRight: '7px' }} />{this.state.phone}</Card.Text>
         }
     }
     displaySharedLink = () => {
@@ -125,10 +138,11 @@ export default class EditProfile extends Component {
                     <Figure.Image className="profile_image" width={171} height={180} alt="Image" src={this.state.imageSrc ? this.state.imageSrc : defaultImageSrc} />
                 </div>
                 <Card.Text className="user-name"><i className="fas fa-user " style={{ color: '#279081' }} /> {this.state.username} </Card.Text>
-                <Card.Text className="description"><i className="fas fa-map-marker-alt" style={{ color: '#279081', marginRight: '5px' }} /> {this.state.address}</Card.Text>
-                <Card.Text className="description"><i className="fas fa-envelope-square" style={{ color: '#279081', marginRight: '7px' }} />{this.state.email}</Card.Text>
+                <Card.Text><i className="fas fa-map-marker-alt" style={{ color: '#279081', marginRight: '5px' }} /> {this.state.address}</Card.Text>
+                {this.showUserPhoneNumber()}
+                <Card.Text ><i className="fas fa-envelope-square" style={{ color: '#279081', marginRight: '7px' }} />{this.state.email}</Card.Text>
                 <Card.Link href="#"><i className="fas fa-link" /> {this.state.link}</Card.Link>
-                <Card.Text className="description"><i className="fas fa-info" style={{ color: '#279081', marginRight: '5px' }} /> {this.state.description}</Card.Text>
+                <Card.Text ><i className="fas fa-info" style={{ color: '#279081', marginRight: '5px' }} /> {this.state.description}</Card.Text>
                 <button className="editBtn" type="button" onClick={this.handleShowEdit}><i className="fas fa-pen"></i></button>
                 <br />
                 <Modal
@@ -163,6 +177,10 @@ export default class EditProfile extends Component {
                                     <FormControl name="email" defaultValue={this.state.email} onChange={(e) => this.handleChange(e)} ></FormControl>
                                 </Form.Group>
                                 <Form.Group className="mb-3">
+                                    <Form.Label className="col-form-label">Phone Number:</Form.Label>
+                                    <FormControl name="phone" defaultValue={this.state.phone} onChange={(e) => this.handleChange(e)} ></FormControl>
+                                </Form.Group>
+                                <Form.Group className="mb-3">
                                     <Form.Label className="col-form-label">Link:</Form.Label>
                                     <FormControl name="link" defaultValue={this.state.link} onChange={(e) => this.handleChange(e)} ></FormControl>
                                 </Form.Group>
@@ -176,7 +194,7 @@ export default class EditProfile extends Component {
                                     <Button variant="primary" type="submit" >Edit</Button>
                                 </Modal.Footer>
                             </Form>
-                            <ImageCropper  onSetImageFileState={this.setImageFileState}></ImageCropper>
+                            <ImageCropper onSetImageFileState={this.setImageFileState}></ImageCropper>
                         </div>
                     </Modal.Body>
                 </Modal>
