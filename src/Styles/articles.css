@@ -68,7 +68,6 @@
   height: 500px;
   margin-top: 7px;
 }
-
 @media screen and (max-width:3440px) {
   .wrap{
     width: 70%;
@@ -225,6 +224,10 @@
     }
     .article-top-right{
       font-size: small;
+    }
+    .clip-block{
+      margin-top:inherit;
+      margin-bottom: inherit;
     }
     .clip-caption-image{
      width: 70%;

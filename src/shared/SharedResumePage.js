@@ -23,6 +23,7 @@ export default class SharedResumePage extends Component {
     componentDidMount = () => {
         requester.get(`UserResume/${this.state.userId}`)
             .then(data => {
+                console.log(data);
                 const { history } = this.props;
                 if (data === undefined) {
                     return history.push('/404');

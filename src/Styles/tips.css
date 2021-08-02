@@ -83,6 +83,10 @@
     margin-top:10%;
     font-size: 40px;
   }
+  .carousel-container{
+    width: 90%;
+    margin-left: 5%;
+   }
   .slide{
     font-size: large;
     height: 350px;
@@ -118,6 +122,10 @@
   .tip-title{
     font-size: x-large;
   }
+  .carousel-container{
+    width: 90%;
+    margin-left: 5%;
+   }
    .info-home-title{
      font-size:30px
    }
@@ -151,6 +159,11 @@
   }
   .slide{
     height: 550px;
+   }
+   .carousel-container{
+    width: 90%;
+    height: 70%;
+    margin-left: 5%;
    }
  }
 @media screen and (max-width:320px) {
