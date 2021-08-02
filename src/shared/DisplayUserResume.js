@@ -10,6 +10,7 @@ export default class DisplayUserResume extends Component {
         super(props);
         this.state = {
             imageSrc: null,
+            username:null,
             userProfile: [],
             userSkills: [],
             userLanguages: [],
@@ -28,7 +29,7 @@ export default class DisplayUserResume extends Component {
         requester.get(`UserResume/${this.props.userId}`)
             .then(data => {
                 if (data.length > 0) {
-                    return this.setState({ userProfile: data, imageSrc: data[0].imageSrc, });
+                    return this.setState({ userProfile: data, username:data[0].username, imageSrc: data[0].imageSrc, });
                 }
             })
             .catch(err => {
@@ -58,8 +59,8 @@ export default class DisplayUserResume extends Component {
     render = () => {
         let info = this.state.userProfile.map((info, index) => {
             return <div key={index}>
-                <div className="profile_image_container">
-                    <Figure.Image className="profile_image" alt="Image" src={this.state.imageSrc ? this.state.imageSrc : defaultImageSrc} />
+                <div className="profile-image-container">
+                    <Figure.Image className="profile-image" alt="Image" src={this.state.imageSrc ? this.state.imageSrc : defaultImageSrc} />
                 </div>
                 <Card.Text><i className="fas fa-user" style={{ color: '#279081' }} /><span className="user-name"> {info.username}</span></Card.Text>
                 <Card.Text><i className="fas fa-map-marker-alt" style={{ color: '#279081', marginRight: '5px' }} /> {info.address}</Card.Text>
@@ -111,6 +112,7 @@ export default class DisplayUserResume extends Component {
         })
         return (
             <div className="home-container" >
+                    <h1 className="home-container-welcome2">{this.state.username} RESUME</h1>
                 <Card.Body className="float-child1">
                     <Container >
                         <br />

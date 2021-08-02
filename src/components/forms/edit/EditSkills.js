@@ -67,6 +67,9 @@ export default class EditSkills extends Component {
         if (data.title == null || data.level == null) {
             return this.setState({ error: "All fields are required!" })
         }
+        else if(data.level<=0 || data.level>100){
+            return this.setState({error: "Level must be between 0 and 100"});
+        }
 
         requester.post(`skill`, data)
             .then(data => {
@@ -90,6 +93,9 @@ export default class EditSkills extends Component {
         }
         if (data.title === "" || data.level === null) {
             return this.setState({ error: 'All fields are required.' })
+        }
+        else if(data.level<=0 || data.level>100){
+            return this.setState({error: "Level must be between 0 and 100"});
         }
         requester.put(`Skill/${this.state.id}`, data)
             .then(data => {
@@ -209,14 +215,14 @@ export default class EditSkills extends Component {
                 </Modal>
                 {/* DELETE MODAL CONFIRMATION */}
                 <Modal
-                bsPrefix="modal"
-                    size="sm"
+                    size="lg"
                     show={this.state.showDelete}
                     onHide={this.handleCloseDelete}
-                    aria-labelledby="example-modal-sizes-title-sm"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title id="example-modal-sizes-title-sm">
+                        <Modal.Title id="contained-modal-title-vcenter">
                             Please, confirm the delete action.
                         </Modal.Title>
                     </Modal.Header>

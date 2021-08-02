@@ -6,6 +6,11 @@ import UserAddForm from '../../../images/add_form1.png';
 import ShareFormCLick from '../../../images/shared_user_link.png';
 
 export default class StepByStep extends Component {
+    showButton=()=>{
+        if(!sessionStorage.getItem('token')){
+           return <Button  className="step-button" href="/register" variant="warning" >Step 1</Button>
+        }
+    }
     render = () => {
         return (
             <div className="steps-container">
@@ -16,7 +21,7 @@ export default class StepByStep extends Component {
                             <div className="clip-text">
                                 <h2 className="clip-title" >FIRST</h2>
                                 <p className="clip-paragraph">Create your account</p>
-                                <Button  className="step-button" href="/register" variant="warning" >Step 1</Button>
+                                {this.showButton()}
                             </div>
                         </div>
                         <div className="clip-each-step clip--step-solid">

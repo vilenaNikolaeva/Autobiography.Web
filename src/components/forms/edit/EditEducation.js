@@ -101,7 +101,7 @@ export default class EditEducation extends Component {
             data.title === null ||
             data.startDate === null ||
             this.state.endDate == null && this.state.present === 'false') {
-            return this.setState({ error: 'Fill in all fields' });
+            return this.setState({ error: 'All fields are required' });
         }
         requester.post(`Education`, data)
             .then(data => {
@@ -179,8 +179,8 @@ export default class EditEducation extends Component {
                         <b> To </b>
                         {this.checkEndDate(educ.endDate, educ.present)}
                     </Card.Text>
-                    <Card.Text className="title" > Educational qualification : <b>{educ.title}</b></Card.Text>
-                    <Card.Text className="description">{educ.description}</Card.Text>
+                    <Card.Text > Educational qualification : <b>{educ.title}</b></Card.Text>
+                    <Card.Text>{educ.description}</Card.Text>
                     <button className="editBtn" onClick={() => this.getEducationForEdit(educ)}  ><i className="fas fa-edit"></i></button>
                     <button className="editBtn" onClick={() => this.getEducationForDelete(educ)}><i className="far fa-trash-alt"></i></button>
                     <hr className="dividing-line" />
@@ -314,20 +314,21 @@ export default class EditEducation extends Component {
                 </Modal>
                 {/* DELETE MODAL FORM */}
                 <Modal
-                    size="sm"
+                    size="lg"
                     show={this.state.showDelete}
                     onHide={this.handleCloseDelete}
-                    aria-labelledby="example-modal-sizes-title-sm"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title id="example-modal-sizes-title-sm">
+                        <Modal.Title id="contained-modal-title-vcenter">
                             Please, confirm the delete action.
                         </Modal.Title>
                     </Modal.Header>
                     <Form>
                         <Modal.Body>
                             <Card.Text className="title" name="university"><b>{this.state.university}</b></Card.Text>
-                            <Card.Text className="title" > Educational qualification : <b>{this.state.title}</b></Card.Text>
+                            <Card.Text > Educational qualification : <b>{this.state.title}</b></Card.Text>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={() => this.handleDelete()}>Yes</Button>

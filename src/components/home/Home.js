@@ -33,11 +33,13 @@ export default class Home extends Component {
                 {this.displayGetStartedButton()}
                 <Articles />
                 <Card.Text className="info-container">
-                    <Card.Title as="h3" className="info-home-title">Check out those tips before you get start.</Card.Title>
-                </Card.Text>
-                <Tips />
-                <Card.Title as="label" className="message-question">Not sure how to start?! </Card.Title>
-                <StepByStep />
+                        <Card.Title as="h3" className="info-home-title">Check out those tips before you get start.</Card.Title>
+                        <Tips />
+                    </Card.Text>
+                    <Container className="step-container">
+                        <Card.Title as="label" className="message-question">Not sure how to start?! </Card.Title>
+                        <StepByStep />
+                    </Container>
                 <Container as="div" className="message-container">
                     <Card.Title as="label" className="message-title">Click and Help yourself with the example.</Card.Title>
                     <Button href="/exampleCv" id="exampleCvBtn"></Button>

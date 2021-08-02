@@ -27,12 +27,13 @@ export default class AppRouter extends Component {
       <Fragment>
         <Route path="/login"><LoginForm onLoginChange={this.props.onLoginChange} /></Route>
         <Route path="/register"><RegisterForm /></Route>
-        <Route path="/exampleCv"><ExampleCv /></Route>
+        {/* <Route path="/exampleCv"><ExampleCv /></Route> */}
       </Fragment>
 
     return (
       <Switch >
         <Route exact path="/"><Home isUserLoggedIn={loggedIn} /></Route>
+        <Route path="/exampleCv"><ExampleCv /></Route>
         <Route path="/sharedResume/:id" render={(props) => <SharedResumePage {...props} />}></Route>
         <Route path="/404"><NotFoundPage /></Route>
         {loggedIn ? (userNavbarRoute) : (guestNavBarRoute)}

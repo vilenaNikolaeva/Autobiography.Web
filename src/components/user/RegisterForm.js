@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import './../../Styles/registerStyle.css'
+import './../../Styles/registerStyle.css';
 import requester from './../../infrastructure/requester';
 import { Redirect } from 'react-router';
 import Error from './../errorMessage/Error';
 import { Card, Form, FormControl } from 'react-bootstrap';
+import EditLanguages from './../forms/edit/EditLanguages';
+import { eachHourOfIntervalWithOptions } from 'date-fns/fp';
 
 export default class RegisterForm extends Component {
   constructor(props) {
@@ -11,6 +13,7 @@ export default class RegisterForm extends Component {
     this.state = {
       username: '',
       password: '',
+      email: '',
       repeatedPassword: '',
       token: '',
       error: ''
@@ -30,7 +33,8 @@ export default class RegisterForm extends Component {
       username: this.state.username,
       password: this.state.password,
       repeatedPassword: this.state.repeatedPassword,
-      token: this.state.token
+      token: this.state.token,
+      email: this.state.email
     };
 
     if (this.state.password !== this.state.repeatedPassword) {
@@ -39,13 +43,22 @@ export default class RegisterForm extends Component {
 
     requester.post('Authentication/register', data)
       .then(data => {
-        console.log(data)
-        if (!data.hasOwnProperty("status")) {
-          sessionStorage.setItem('token', data.token);
-          sessionStorage.setItem('user-id', data.userId);
+        if (data !== undefined) {
+          if (data.hasOwnProperty('status') == 400) {
+            return this.setState({ error: data.title });
+          }
+          else if (data.error) {
+            return this.setState({ error: data.error });
+          }
+          else if (data.length>=0)
+          {
+            data.forEach(err=>
+              this.setState({error:err.description}));
+          }
         }
         else {
-          return this.setState({ error: data.title });
+          sessionStorage.setItem('token', data.token);
+          sessionStorage.setItem('user-id', data.userId);
         }
       })
       .then(res => { return <Redirect to="/" /> })

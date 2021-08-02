@@ -6,14 +6,11 @@
 }
 .Header{
   position: relative;
-  padding-top:15px;
-  padding-bottom: 20px;
   border-bottom: 3px solid #419489;
 }
 .Container {
   position: relative;
   margin-bottom:50px; 
-  /* top:50px; */
 }
 
 .particles{
@@ -27,7 +24,6 @@
   background: linear-gradient(to right,#313B47,#00C8AA);
   transform: skewY(-6deg);
 }
-
 .particles2{
   position: absolute;
   z-index: -99;
@@ -39,7 +35,6 @@
   background: linear-gradient(to right,#313B47,#00C8AA);
   transform: skewY(-6deg);
 }
-
 .getStartBtn{
   position: absolute;
   height: 2.5rem;
@@ -54,16 +49,9 @@
   /* margin-bottom: 30%; */
 }
 .body-homeContainer{
-  /* margin-top: 10%; */
-  margin-bottom: 10%;
   padding: 2.0rem;
 }
-/* @media (min-width: 1024px){
-  .particles{
-    bottom: 2.5rem !important;
-    height: 70% !important;
-   }
-  } */
+
 
 @media screen and (max-width: 768px){
 .container, .container-md, .container-sm {

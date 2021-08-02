@@ -202,13 +202,14 @@ export default class EditLanguages extends Component {
                 </Modal>
                 {/* DELETE MODAL FORM */}
                 <Modal
-                    size="sm"
+                    size="lg"
                     show={this.state.showDelete}
                     onHide={this.handleCloseDelete}
-                    aria-labelledby="example-modal-sizes-title-sm"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title id="example-modal-sizes-title-sm">
+                        <Modal.Title id="contained-modal-title-vcenter">
                             Please, confirm the delete action.
                         </Modal.Title>
                     </Modal.Header>

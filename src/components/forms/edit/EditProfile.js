@@ -5,7 +5,6 @@ import Error from './../../errorMessage/Error';
 import defaultImageSrc from '../../../images/blank-profile-picture.png';
 import ImageCropper from './ImageCropper'
 import { Route, Link, Redirect } from 'react-router-dom';
-import SharedResumePage from './../../../shared/SharedResumePage';
 
 export default class EditProfile extends Component {
     constructor(props) {
@@ -118,14 +117,14 @@ export default class EditProfile extends Component {
     displaySharedLink = () => {
         if (this.state.isItPublic === true) {
 
-            return <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-                <div className="shared_link">
-                    <Link to={`/sharedResume/${this.props.userId}`} >Shared Link</Link>
-                </div>
-                <div>
+            return <Container style={{ display: 'flex', marginLeft: '7%', justifyContent: 'space-betweem', marginBottom: '20px',alignItems:'center' }}>
+                <Container>
+                    <Link  className="shared-link" to={`/sharedResume/${this.props.userId}`} >Shared Link</Link>
+                </Container>
+                <Container>
                     <Button onClick={() => { navigator.clipboard.writeText(`http://localhost:3002/sharedResume/${this.props.userId}`) }} variant="outline-success">Copy Link</Button>
-                </div>
-            </div>;
+                </Container>
+            </Container>;
         }
     }
     render = () => {
@@ -134,9 +133,9 @@ export default class EditProfile extends Component {
                 <br />
 
                 {this.displaySharedLink()}
-                <div className="profile_image_container">
-                    <Figure.Image className="profile_image" width={171} height={180} alt="Image" src={this.state.imageSrc ? this.state.imageSrc : defaultImageSrc} />
-                </div>
+                <Container className="profile-image-container">
+                    <Figure.Image className="profile-image" width={171} height={180} alt="Image" src={this.state.imageSrc ? this.state.imageSrc : defaultImageSrc} />
+                </Container>
                 <Card.Text className="user-name"><i className="fas fa-user " style={{ color: '#279081' }} /> {this.state.username} </Card.Text>
                 <Card.Text><i className="fas fa-map-marker-alt" style={{ color: '#279081', marginRight: '5px' }} /> {this.state.address}</Card.Text>
                 {this.showUserPhoneNumber()}

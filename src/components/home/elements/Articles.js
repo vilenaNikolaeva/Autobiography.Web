@@ -41,7 +41,7 @@ export default class Articles extends Component {
                     <div class="clip-each clip-solid">
                         <div class="clip-caption"><Card.Text className="article" >
                             <b>Writing a CV</b> in itself is very time-consuming only while selecting, correcting,
-                            or supplementing information. <b>Let</b> me introduce you to the light and fast "SFmaker"
+                            or supplementing information. <b>Let</b> me introduce you to the light and fast "SF"
                             platform with which you can present yourself in the best light as only you can.
                         </Card.Text></div>
                     </div>

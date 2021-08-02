@@ -1,4 +1,5 @@
-const BASE_URL = 'https://localhost:44311/api/';
+ const BASE_URL = 'https://localhost:44311/api/';
+//const BASE_URL = 'https://stepforward-api.azurewebsites.net/api/';
 
 function getToken() {
     return 'Bearer ' + sessionStorage.token;

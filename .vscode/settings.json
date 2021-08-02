@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/24ea0b70-f926-4d90-abaa-8bfa3fb163b9/resourceGroups/StepForward/providers/Microsoft.Web/sites/StepForward-UI",
+    "appService.deploySubpath": "build"
+}
