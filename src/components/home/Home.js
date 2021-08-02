@@ -28,7 +28,7 @@ export default class Home extends Component {
                 <Card.Text className="home-container">
                     <Card.Title as="h3" className="home-container-welcome">Step forword in your life .</Card.Title>
                     <Card.Title as="h3" className="home-container-welcome2">Create your CV.
-                        Create your new feature.</Card.Title>
+                        Create your new future.</Card.Title>
                 </Card.Text>
                 {this.displayGetStartedButton()}
                 <Articles />
